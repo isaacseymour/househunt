@@ -4,12 +4,14 @@
   "description": "Find a nice house",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "./node_modules/.bin/serve -p 3001"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jspm": "^0.16.0"
+    "jspm": "^0.16.0",
+    "serve": "^1.4.0"
   },
   "jspm": {
     "directories": {},
