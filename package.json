@@ -4,15 +4,20 @@
   "description": "Find a nice house",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jspm run test/*-test.js | ./node_modules/.bin/faucet",
+    "test": "./node_modules/.bin/babel-node test/components/destination-test.js | ./node_modules/.bin/faucet",
     "start": "./node_modules/.bin/serve -p 3001"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^5.8.21",
     "faucet": "0.0.1",
+    "immutable": "^3.7.4",
+    "jsdom": "^3.1.2",
     "jspm": "^0.16.0",
-    "serve": "^1.4.0"
+    "react": "^0.13.3",
+    "serve": "^1.4.0",
+    "tape": "^4.2.0"
   },
   "jspm": {
     "directories": {},
