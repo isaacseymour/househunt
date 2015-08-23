@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import Destination from '../app/components/destination';
+import Destination from '../components/destination';
 
 const destination = Map({
   postcode: 'WC1X 9QZ',
