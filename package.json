@@ -4,7 +4,7 @@
   "description": "Find a nice house",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jspm run test/*.js | ./node_modules/.bin/faucet",
+    "test": "./node_modules/.bin/jspm run test/*-test.js | ./node_modules/.bin/faucet",
     "start": "./node_modules/.bin/serve -p 3001"
   },
   "author": "",
