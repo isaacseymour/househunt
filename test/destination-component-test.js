@@ -12,7 +12,6 @@ test('Destination component', (t) => {
     postcode: 'WC1X 9QZ',
   });
 
-
   const result = ReactTestUtils.renderIntoDocument(
     <Destination destination={destination} uuid="123" />
   );
@@ -21,5 +20,3 @@ test('Destination component', (t) => {
   t.ok(element.getDOMNode().textContent.indexOf('WC1X 9QZ') > -1);
   t.end();
 });
-
-
