@@ -20,7 +20,8 @@
       "react": "npm:react@^0.13.3",
       "react-redux": "npm:react-redux@^0.9.0",
       "react-router": "npm:react-router@^0.13.3",
-      "redux": "npm:redux@^1.0.1"
+      "redux": "npm:redux@^1.0.1",
+      "uuid": "npm:uuid@^2.0.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.22",
