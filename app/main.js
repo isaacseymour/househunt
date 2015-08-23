@@ -1,6 +1,6 @@
 import React from 'react';
 import AddDestination from './add-destination';
-import { addDestination } from './actions';
+import { addDestination, deleteDestination } from './actions';
 import { househuntApp } from './reducers';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -15,12 +15,21 @@ class Househunt extends React.Component {
     this.props.dispatch(addDestination(postcode));
   }
 
+  deleteDestinationCallback(uuid) {
+    this.props.dispatch(deleteDestination(uuid));
+  }
+
   render() {
-    console.log('househunt got props', this.props);
     return (
       <div>
-        <AddDestination addDestinationCallback={(postcode) => this.addDestinationCallback(postcode) }/>
-        <ListDestinations destinations={this.props.destinations} />
+        <AddDestination
+          addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
+        />
+
+        <ListDestinations
+          deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
+          destinations={this.props.destinations}
+        />
       </div>
     );
   }

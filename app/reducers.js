@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { ADD_DESTINATION } from './actions';
+import { ADD_DESTINATION, DELETE_DESTINATION } from './actions';
 import uuid from 'uuid';
 
 // State looks like:
@@ -42,6 +42,10 @@ export function househuntApp(state = initialState, action) {
     case ADD_DESTINATION:
       return Object.assign({}, state, {
         destinations: state.destinations.set(uuid.v1(), Map({ postcode: action.postcode })),
+      });
+    case DELETE_DESTINATION:
+      return Object.assign({}, state, {
+        destinations: state.destinations.delete(action.uuid),
       });
     default:
       return state;

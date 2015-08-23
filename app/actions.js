@@ -5,3 +5,11 @@ export function addDestination(postcode) {
     postcode,
   };
 }
+
+export const DELETE_DESTINATION = 'DELETE_DESTINATION';
+export function deleteDestination(uuid) {
+  return {
+    type: DELETE_DESTINATION,
+    uuid,
+  }
+}
