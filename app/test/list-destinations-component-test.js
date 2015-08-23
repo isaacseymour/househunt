@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import ListDestinations from '../app/components/list-destinations';
+import ListDestinations from '../components/list-destinations';
 
 test('ListDestinations component', (t) => {
   dom();
