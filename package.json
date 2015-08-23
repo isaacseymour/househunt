@@ -12,6 +12,7 @@
   "dependencies": {
     "babel": "^5.8.21",
     "babel-tape-runner": "^1.2.0",
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "faucet": "0.0.1",
     "immutable": "^3.7.4",
