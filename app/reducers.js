@@ -38,13 +38,11 @@ const initialState = {
 };
 
 export function addDestinationReducer(state, action) {
-  const newDestinations = state.destinations.set(uuid.v1(), Map({
+  const destinations = state.destinations.set(uuid.v1(), Map({
     postcode: action.postcode,
   }));
 
-  return Object.assign({}, state, {
-    destinations: newDestinations
-  });
+  return Object.assign({}, state, { destinations });
 }
 
 export function deleteDestinationReducer(state, action) {
