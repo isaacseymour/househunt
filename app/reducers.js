@@ -29,16 +29,20 @@ import uuid from 'uuid';
 //   },
 // }
 
-const initialState = Map({
-  destinations: Map(),
+const initialState = {
+  destinations: Map({
+    [uuid.v1()]: Map({ postcode: 'WC1X 9QZ' }),
+  }),
   houses: Map(),
   commutes: Map(),
-});
+};
 
 export function househuntApp(state = initialState, action) {
   switch(action.type) {
     case ADD_DESTINATION:
-      return state.setIn(['destinations', uuid.v1()], Map({ postcode: action.postcode }));
+      return Object.assign({}, state, {
+        destinations: state.destinations.set(uuid.v1(), Map({ postcode: action.postcode })),
+      });
     default:
       return state;
   }
