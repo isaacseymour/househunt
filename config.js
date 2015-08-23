@@ -18,8 +18,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.20",
     "core-js": "npm:core-js@1.1.1",
     "immutable": "npm:immutable@3.7.4",
-    "react": "npm:react@0.14.0-beta3",
-    "react-dom": "npm:react-dom@0.14.0-beta3",
+    "react": "npm:react@0.13.3",
     "react-redux": "npm:react-redux@0.9.0",
     "react-router": "npm:react-router@0.13.3",
     "redux": "npm:redux@1.0.1",
@@ -112,10 +111,6 @@ System.config({
       "asap": "npm:asap@2.0.3",
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
-    "npm:react-dom@0.14.0-beta3": {
-      "fbjs": "npm:fbjs@0.1.0-alpha.4",
-      "react": "npm:react@0.14.0-beta3"
-    },
     "npm:react-redux@0.9.0": {
       "invariant": "npm:invariant@2.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
@@ -130,12 +125,6 @@ System.config({
     "npm:react@0.13.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "envify": "npm:envify@3.4.0",
-      "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:react@0.14.0-beta3": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "envify": "npm:envify@3.4.0",
-      "fbjs": "npm:fbjs@0.1.0-alpha.4",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:readable-stream@1.1.13": {
