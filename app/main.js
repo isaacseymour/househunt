@@ -1,11 +1,10 @@
 import React from 'react';
-import AddDestination from './add-destination';
+import AddDestination from './components/add-destination';
+import ListDestinations from './components/list-destinations';
 import { addDestination, deleteDestination } from './actions';
 import { househuntApp } from './reducers';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
-
-import ListDestinations from './list-destinations';
 
 const store = createStore(househuntApp);
 store.subscribe(() => console.log('store change', store.getState()));

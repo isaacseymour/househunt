@@ -37,16 +37,29 @@ const initialState = {
   commutes: Map(),
 };
 
+export function addDestinationReducer(state, action) {
+  const newDestinations = state.destinations.set(uuid.v1(), Map({
+    postcode: action.postcode,
+  }));
+
+  return Object.assign({}, state, {
+    destinations: newDestinations
+  });
+}
+
+export function deleteDestinationReducer(state, action) {
+  return Object.assign({}, state, {
+    destinations: state.destinations.delete(action.uuid),
+  });
+}
+
+
 export function househuntApp(state = initialState, action) {
   switch(action.type) {
     case ADD_DESTINATION:
-      return Object.assign({}, state, {
-        destinations: state.destinations.set(uuid.v1(), Map({ postcode: action.postcode })),
-      });
+      return addDestinationReducer(state, action);
     case DELETE_DESTINATION:
-      return Object.assign({}, state, {
-        destinations: state.destinations.delete(action.uuid),
-      });
+      return deleteDestinationReducer(state, action);
     default:
       return state;
   }
