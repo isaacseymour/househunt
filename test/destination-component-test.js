@@ -1,10 +1,10 @@
 import test from 'tape';
 import { dom } from './helpers';
 import { Map } from 'immutable';
-
+import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import Destination from '../../app/components/destination';
+import Destination from '../app/components/destination';
 
 test('Destination component', (t) => {
   dom();
@@ -18,7 +18,7 @@ test('Destination component', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
-  t.equal(element.getDOMNode().textContent, 'hello world');
+  t.ok(element.getDOMNode().textContent.indexOf('WC1X 9QZ') > -1);
   t.end();
 });
 
