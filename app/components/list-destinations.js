@@ -15,7 +15,8 @@ export default class ListDestinations extends React.Component {
       );
     }).toList();
   }
+
   render() {
-    return <ul>{ this.renderDestinations() }</ul>;
+    return (<ul>{this.renderDestinations()}</ul>);
   }
 }

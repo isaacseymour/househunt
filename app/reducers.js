@@ -1,5 +1,9 @@
 import { Map } from 'immutable';
-import { ADD_DESTINATION, DELETE_DESTINATION } from './actions';
+import {
+  ADD_DESTINATION,
+  DELETE_DESTINATION,
+  ADD_HOUSE,
+} from './actions';
 import uuid from 'uuid';
 
 // State looks like:
@@ -16,6 +20,7 @@ import uuid from 'uuid';
 //     uuid: {
 //       url,
 //       postcode,
+//       imageUrl,
 //     }
 //   },
 //   commutes: {
@@ -51,6 +56,11 @@ export function deleteDestinationReducer(state, action) {
   });
 }
 
+export function addHouseReducer(state, action) {
+  const houses = state.houses.set(uuid.v1(), Map({ url: action.url }));
+
+  return Object.assign({}, state, { houses });
+}
 
 export function househuntApp(state = initialState, action) {
   switch(action.type) {
@@ -58,6 +68,8 @@ export function househuntApp(state = initialState, action) {
       return addDestinationReducer(state, action);
     case DELETE_DESTINATION:
       return deleteDestinationReducer(state, action);
+    case ADD_HOUSE:
+      return addDestinationReducer(state, action);
     default:
       return state;
   }

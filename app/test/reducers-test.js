@@ -4,11 +4,13 @@ import { Map } from 'immutable';
 import {
   addDestination,
   deleteDestination,
+  addHouse,
 } from '../actions';
 
 import {
   addDestinationReducer,
   deleteDestinationReducer,
+  addHouseReducer,
 } from '../reducers';
 
 test('adding destination', (t) => {
@@ -30,3 +32,13 @@ test('removing a destination', (t) => {
   t.end();
 });
 
+test('adding house', (t) => {
+  const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
+  const initState = { houses: Map() };
+  const newState = addHouseReducer(initState, addHouse(rightmoveUrl));
+  t.equal(newState.houses.size, 1);
+  t.deepEqual(newState.houses.first().toJS(), Map({
+    url: rightmoveUrl,
+  }).toJS());
+  t.end();
+});
