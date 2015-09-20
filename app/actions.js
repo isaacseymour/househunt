@@ -18,6 +18,6 @@ export const ADD_HOUSE = 'ADD_HOUSE';
 export function addHouse(url) {
   return {
     type: ADD_HOUSE,
-    url
+    url,
   };
 }
