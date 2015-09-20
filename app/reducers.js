@@ -69,7 +69,7 @@ export function househuntApp(state = initialState, action) {
     case DELETE_DESTINATION:
       return deleteDestinationReducer(state, action);
     case ADD_HOUSE:
-      return addDestinationReducer(state, action);
+      return addHouseReducer(state, action);
     default:
       return state;
   }
