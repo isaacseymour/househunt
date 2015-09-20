@@ -1,6 +1,5 @@
 import test from 'tape';
 import { dom } from './helpers';
-import { Map } from 'immutable';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 

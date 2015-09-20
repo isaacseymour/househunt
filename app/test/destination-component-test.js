@@ -28,10 +28,10 @@ test('Deleting the destination', (t) => {
 
   const callback = (uuid) => {
     t.equal(uuid, 'abc123');
-  }
+  };
 
   const result = ReactTestUtils.renderIntoDocument(
-    <Destination 
+    <Destination
       destination={destination} uuid='abc123'
       deleteDestinationCallback={callback}
     />
