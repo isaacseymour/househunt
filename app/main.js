@@ -31,9 +31,10 @@ class Househunt extends React.Component {
   render() {
     return (
       <div>
-        <AddDestination
-          addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
-        />
+        <div>
+          <AddDestination
+            addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
+          />
 
         <ListDestinations
           deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
@@ -46,6 +47,7 @@ class Househunt extends React.Component {
 
         <ListHouses houses={this.props.houses} />
       </div>
+    </div>
     );
   }
 }
