@@ -11,5 +11,13 @@ export function deleteDestination(uuid) {
   return {
     type: DELETE_DESTINATION,
     uuid,
-  }
+  };
+}
+
+export const ADD_HOUSE = 'ADD_HOUSE';
+export function addHouse(url) {
+  return {
+    type: ADD_HOUSE,
+    url,
+  };
 }

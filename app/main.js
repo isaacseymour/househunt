@@ -1,7 +1,13 @@
 import React from 'react';
 import AddDestination from './components/add-destination';
 import ListDestinations from './components/list-destinations';
-import { addDestination, deleteDestination } from './actions';
+import AddHouse from './components/add-house';
+import ListHouses from './components/list-houses';
+import {
+  addDestination,
+  deleteDestination,
+  addHouse,
+} from './actions';
 import { househuntApp } from './reducers';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -18,18 +24,30 @@ class Househunt extends React.Component {
     this.props.dispatch(deleteDestination(uuid));
   }
 
+  addHouseCallback(url) {
+    this.props.dispatch(addHouse(url));
+  }
+
   render() {
     return (
       <div>
-        <AddDestination
-          addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
-        />
+        <div>
+          <AddDestination
+            addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
+          />
 
         <ListDestinations
           deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
           destinations={this.props.destinations}
         />
       </div>
+
+      <div>
+        <AddHouse addHouseCallback={(url) => this.addHouseCallback(url)} />
+
+        <ListHouses houses={this.props.houses} />
+      </div>
+    </div>
     );
   }
 }
