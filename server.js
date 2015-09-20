@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static('app'));
 app.use(bodyParser.json());
 
-app.use('/', routes)
+app.use('/', routes);
 
 const server = http.createServer(app);
 
@@ -23,5 +23,4 @@ server.on('listening', () => {
 server.on('error', (e) => {
   console.log('Server got error', e);
 });
-
 

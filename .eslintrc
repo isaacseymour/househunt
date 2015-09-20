@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint:recommended",
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "modules": true,
+    "spread": true,
+    "restParams": true,
+    "templateStrings": true,
+    "classes": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "blockBindings": true,
+    "jsx": true,
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+  },
+  "rules": {
+    "comma-dangle": [2, "always-multiline"],
+    "semi": [2, "always"],
+    "no-console": 0,
+    "react/jsx-uses-react": 2,
+  },
+  "plugins": ["react"],
+  "globals": {
+    "google": true,
+  },
+}

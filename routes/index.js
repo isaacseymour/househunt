@@ -20,7 +20,7 @@ router.post('/crawl', (req, res) => {
     console.log('rejecting - not rightmove');
 
     return res.json({
-      error: { message: "must be a Rightmove link" }
+      error: { message: "must be a Rightmove link" },
     });
   }
 
