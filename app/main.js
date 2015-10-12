@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import AddDestination from './components/add-destination';
 import ListDestinations from './components/list-destinations';
 import AddHouse from './components/add-house';
@@ -54,9 +55,9 @@ class Househunt extends React.Component {
 
 const ConnectedHousehunt = connect((state) => state)(Househunt);
 
-React.render(
+ReactDOM.render(
   <Provider store={store}>
-    {() => <ConnectedHousehunt />}
+    <ConnectedHousehunt />
   </Provider>,
   document.getElementById('app')
 );
