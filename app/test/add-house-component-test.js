@@ -1,6 +1,7 @@
 import test from 'tape';
 import { dom } from './helpers';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import AddHouse from '../components/add-house';
@@ -17,10 +18,11 @@ test('AddHouse component', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'input');
-  const textNode = element.getDOMNode();
+  const textNode = ReactDOM.findDOMNode(element);
   textNode.value = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
   ReactTestUtils.Simulate.change(textNode);
 
   const form = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'form');
-  ReactTestUtils.Simulate.submit(form.getDOMNode());
+  const formNode = ReactDOM.findDOMNode(form);
+  ReactTestUtils.Simulate.submit(formNode);
 });

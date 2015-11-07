@@ -2,6 +2,7 @@ import test from 'tape';
 import { dom } from './helpers';
 import { Map } from 'immutable';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import ListHouses from '../components/list-houses';
@@ -18,7 +19,7 @@ test('ListHouses component', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'li');
-  const textNode = element.getDOMNode();
+  const textNode = ReactDOM.findDOMNode(element);
   t.ok(textNode.textContent.indexOf('Fetching property details...') > -1);
   t.end();
 });

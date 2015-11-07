@@ -2,6 +2,7 @@ import test from 'tape';
 import { dom } from './helpers';
 import { Map } from 'immutable';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Destination from '../components/destination';
@@ -18,7 +19,7 @@ test('Destination component', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
-  t.ok(element.getDOMNode().textContent.indexOf('WC1X 9QZ') > -1);
+  t.ok(ReactDOM.findDOMNode(element).textContent.indexOf('WC1X 9QZ') > -1);
   t.end();
 });
 

@@ -2,6 +2,7 @@ import test from 'tape';
 import { dom } from './helpers';
 import { Map } from 'immutable';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import House from '../components/house';
@@ -19,7 +20,7 @@ test('House component while fetching the house', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
-  t.ok(element.getDOMNode().textContent.indexOf('Fetching property details...') > -1);
+  t.ok(ReactDOM.findDOMNode(element).textContent.indexOf('Fetching property details...') > -1);
 });
 
 test('House component with the house loaded', (t) => {
@@ -37,7 +38,7 @@ test('House component with the house loaded', (t) => {
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
-  t.ok(element.getDOMNode().textContent.indexOf(house.get('address')) > -1);
+  t.ok(ReactDOM.findDOMNode(element).textContent.indexOf(house.get('address')) > -1);
   // TODO: scrape the image
   // t.ok(element.getDOMNode().innerHTML.indexOf(house.get('imageUrl')) > -1);
 });
