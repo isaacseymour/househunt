@@ -17,13 +17,21 @@ export default class AddDestination extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(event) => this.submit(event) }>
-        <label>Postcode</label>
-        <input type="text"
-               value={this.state.postcodeInput}
-               onChange={(event) => this.handleChange(event) } />
-        <button type="submit">Add</button>
-      </form>
+      <div className="row">
+        <form className="col s12" onSubmit={(event) => this.submit(event)}>
+          <div className="row">
+            <div className="input-field col s12">
+              <input type="text"
+                     value={this.state.urlInput}
+                     onChange={(event) => this.handleChange(event)} />
+              <label>Postcode</label>
+            </div>
+          </div>
+          <button
+            className="btn waves-effect waves-light"
+            type="submit">Add</button>
+        </form>
+      </div>
     );
   }
 }

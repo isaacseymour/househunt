@@ -5,7 +5,7 @@ export default class ListDestinations extends React.Component {
   renderDestinations() {
     return this.props.destinations.map((destination, uuid) => {
       return (
-        <li key={uuid}>
+        <li key={uuid} className="collection-item">
           <Destination
             deleteDestinationCallback={this.props.deleteDestinationCallback}
             destination={destination}
@@ -17,6 +17,13 @@ export default class ListDestinations extends React.Component {
   }
 
   render() {
-    return (<ul>{this.renderDestinations()}</ul>);
+    return (
+      <div>
+        <h3>Destinations</h3>
+        { this.props.destinations.length > 0 &&
+          <ul className="collection">{this.renderDestinations()}</ul>
+        }
+      </div>
+    );
   }
 }

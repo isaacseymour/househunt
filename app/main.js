@@ -31,24 +31,36 @@ class Househunt extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <AddDestination
-            addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
-          />
+      <div className="container">
+        <div className="row">
+          <div className="col s4">
+            <h3>Add a destination</h3>
+            <AddDestination
+              addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
+            />
+          </div>
 
-        <ListDestinations
-          deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
-          destinations={this.props.destinations}
-        />
+          <div className="col s6 offset-s2">
+            <ListDestinations
+              deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
+              destinations={this.props.destinations}
+            />
+          </div>
+        </div>
+
+        <div className="divider"></div>
+
+        <div className="row">
+          <div className="col s4">
+            <h3>Add a House</h3>
+            <AddHouse addHouseCallback={(url) => this.addHouseCallback(url)} />
+          </div>
+
+          <div className="col s6 offset-s2">
+            <ListHouses houses={this.props.houses} />
+          </div>
+        </div>
       </div>
-
-      <div>
-        <AddHouse addHouseCallback={(url) => this.addHouseCallback(url)} />
-
-        <ListHouses houses={this.props.houses} />
-      </div>
-    </div>
     );
   }
 }

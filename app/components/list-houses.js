@@ -5,7 +5,7 @@ export default class ListHouses extends React.Component {
   renderHouses() {
     return this.props.houses.map((house, uuid) => {
       return (
-        <li key={uuid}>
+        <li key={uuid} className="collection-item">
           <House house={house} uuid={uuid} />
         </li>
       );
@@ -13,6 +13,13 @@ export default class ListHouses extends React.Component {
   }
 
   render() {
-    return (<ul>{this.renderHouses()}</ul>);
+    return (
+      <div>
+        <h3>Houses</h3>
+        { this.props.houses.length > 0 &&
+          <ul className="collection">{ this.renderHouses() }</ul>
+        }
+      </div>
+    );
   }
 }

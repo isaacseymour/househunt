@@ -10,7 +10,9 @@ export default class House extends React.Component {
         </div>
       );
     } else {
-      return (<div>Fetching property details...</div>);
+      return (
+        <div>Fetching property details...</div>
+      );
     }
   }
 }
