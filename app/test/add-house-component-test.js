@@ -8,7 +8,7 @@ import AddHouse from '../components/add-house';
 
 test('AddHouse component', (t) => {
   dom();
-  t.plan(1);
+  t.plan(2);
   const callback = (url) => {
     t.equal(url, 'www.rightmove.co.uk/property-to-rent/property-46665035.html');
   };
@@ -25,4 +25,6 @@ test('AddHouse component', (t) => {
   const form = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'form');
   const formNode = ReactDOM.findDOMNode(form);
   ReactTestUtils.Simulate.submit(formNode);
+
+  t.equal(textNode.value, '');
 });
