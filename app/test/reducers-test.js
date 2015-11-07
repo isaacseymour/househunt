@@ -7,6 +7,7 @@ import {
   deleteDestination,
   addHouse,
   updateHouseData,
+  updateDestinationData,
 } from '../actions';
 
 import {
@@ -14,6 +15,7 @@ import {
   deleteDestinationReducer,
   addHouseReducer,
   updateHouseDataReducer,
+  updateDestinationDataReducer,
 } from '../reducers';
 
 test('adding destination', (t) => {
@@ -59,4 +61,20 @@ test('updating a house', (t) => {
     address: '6 Sanders House',
   }).toJS());
   t.end();
+});
+
+test('updating a destination', (t) => {
+  t.plan(1);
+  const initState = {
+    destinations: Map({
+      [uuid.v1()]: Map({ postcode: 'E1 5QY' }),
+    }),
+  };
+
+  const newState = updateDestinationDataReducer(initState, updateDestinationData('E1 5QY', 1, 2));
+  t.deepEqual(newState.destinations.first().toJS(), {
+    postcode: 'E1 5QY',
+    latitude: 1,
+    longitude: 2,
+  });
 });

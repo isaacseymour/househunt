@@ -6,10 +6,20 @@ export default class Destination extends React.Component {
     this.props.deleteDestinationCallback(this.props.uuid);
   }
 
+  renderLatLng() {
+    if (!this.props.destination.get('latitude')) return null;
+
+    return (
+      <span>
+        ({ this.props.destination.get('latitude') }, { this.props.destination.get('longitude') })
+      </span>
+    );
+  }
   render() {
     return (
       <div>
         { this.props.destination.get('postcode') }
+        { this.renderLatLng() }
         <a href=""
           onClick={(event) => this.onDeleteClick(event)}
           className="secondary-content"><i className="material-icons">delete</i></a>

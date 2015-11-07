@@ -11,11 +11,14 @@ import {
   deleteDestination,
   addHouse,
   updateHouseData,
+  updateDestinationData,
 } from './actions';
 
 import { househuntApp } from './reducers';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
+
+import geocode from './services/geocode';
 
 const store = createStore(househuntApp);
 store.subscribe(() => console.log('store change', store.getState()));
@@ -23,6 +26,9 @@ store.subscribe(() => console.log('store change', store.getState()));
 class Househunt extends React.Component {
   addDestinationCallback(postcode) {
     this.props.dispatch(addDestination(postcode));
+    geocode(postcode).then((data) => {
+      this.props.dispatch(updateDestinationData(postcode, data.lat(), data.lng()));
+    });
   }
 
   deleteDestinationCallback(uuid) {

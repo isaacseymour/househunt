@@ -30,3 +30,13 @@ export function updateHouseData(url, address) {
     address,
   };
 }
+
+export const UPDATE_DESTINATION_DATA = 'UPDATE_DESTINATION_DATA';
+export function updateDestinationData(postcode, lat, lng) {
+  return {
+    type: UPDATE_DESTINATION_DATA,
+    postcode,
+    lat,
+    lng,
+  };
+}
