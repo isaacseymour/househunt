@@ -37,7 +37,6 @@
     "dependencies": {
       "fetch": "npm:whatwg-fetch@^0.10.1",
       "immutable": "npm:immutable@^3.7.4",
-      "materialize-css": "npm:materialize-css@^0.97.1",
       "react": "npm:react@0.14.2",
       "react-dom": "npm:react-dom@0.14.2",
       "react-redux": "npm:react-redux@4",
