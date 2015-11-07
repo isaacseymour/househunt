@@ -17,6 +17,7 @@ System.config({
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "core-js": "npm:core-js@1.2.1",
+    "fetch": "npm:whatwg-fetch@0.10.1",
     "immutable": "npm:immutable@3.7.5",
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react-dom@0.14.0",

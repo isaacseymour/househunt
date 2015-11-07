@@ -3,6 +3,7 @@ import {
   ADD_DESTINATION,
   DELETE_DESTINATION,
   ADD_HOUSE,
+  UPDATE_HOUSE_DATA,
 } from './actions';
 import uuid from 'uuid';
 
@@ -62,6 +63,13 @@ export function addHouseReducer(state, action) {
   return Object.assign({}, state, { houses });
 }
 
+export function updateHouseDataReducer(state, action) {
+  const houseToUpdateUuid = state.houses.findKey((house) => house.get('url') === action.url);
+  const houses = state.houses.setIn([houseToUpdateUuid, 'address'], action.address);
+
+  return Object.assign({}, state, { houses });
+}
+
 export function househuntApp(state = initialState, action) {
   switch(action.type) {
     case ADD_DESTINATION:
@@ -70,6 +78,8 @@ export function househuntApp(state = initialState, action) {
       return deleteDestinationReducer(state, action);
     case ADD_HOUSE:
       return addHouseReducer(state, action);
+    case UPDATE_HOUSE_DATA:
+      return updateHouseDataReducer(state, action);
     default:
       return state;
   }

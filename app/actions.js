@@ -21,3 +21,12 @@ export function addHouse(url) {
     url,
   };
 }
+
+export const UPDATE_HOUSE_DATA = 'UPDATE_HOUSE_DATA';
+export function updateHouseData(url, address) {
+  return {
+    type: UPDATE_HOUSE_DATA,
+    url,
+    address
+  };
+}

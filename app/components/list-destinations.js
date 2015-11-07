@@ -20,7 +20,7 @@ export default class ListDestinations extends React.Component {
     return (
       <div>
         <h3>Destinations</h3>
-        { this.props.destinations.length > 0 &&
+        { this.props.destinations.size > 0 &&
           <ul className="collection">{this.renderDestinations()}</ul>
         }
       </div>

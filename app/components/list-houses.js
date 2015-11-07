@@ -16,7 +16,7 @@ export default class ListHouses extends React.Component {
     return (
       <div>
         <h3>Houses</h3>
-        { this.props.houses.length > 0 &&
+        { this.props.houses.size > 0 &&
           <ul className="collection">{ this.renderHouses() }</ul>
         }
       </div>

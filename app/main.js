@@ -1,14 +1,18 @@
+import 'fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddDestination from './components/add-destination';
 import ListDestinations from './components/list-destinations';
 import AddHouse from './components/add-house';
 import ListHouses from './components/list-houses';
+
 import {
   addDestination,
   deleteDestination,
   addHouse,
+  updateHouseData,
 } from './actions';
+
 import { househuntApp } from './reducers';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -27,6 +31,19 @@ class Househunt extends React.Component {
 
   addHouseCallback(url) {
     this.props.dispatch(addHouse(url));
+    fetch('/crawl', {
+      method: 'POST',
+      body: JSON.stringify({ crawlUrl: url }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((r) => r.json()).then((response) => {
+      console.log('add house response', response);
+      this.props.dispatch(updateHouseData(url, response.address));
+    }).catch((err) => {
+      console.log('add house err', err);
+    });
   }
 
   render() {
