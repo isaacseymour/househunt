@@ -21,7 +21,7 @@ System.config({
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react-dom@0.14.0",
     "react-redux": "npm:react-redux@3.1.0",
-    "react-router": "npm:react-router@1.0.0-rc3",
+    "react-router": "npm:react-router@1.0.0-rc4",
     "redux": "npm:redux@3.0.2",
     "tape": "npm:tape@4.2.1",
     "uuid": "npm:uuid@2.0.1",
@@ -274,9 +274,11 @@ System.config({
     "npm:hash.js@1.0.3": {
       "inherits": "npm:inherits@2.0.1"
     },
-    "npm:history@1.12.3": {
+    "npm:history@1.13.0": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "deep-equal": "npm:deep-equal@1.0.1",
-      "invariant": "npm:invariant@2.1.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "invariant": "npm:invariant@2.1.2",
       "qs": "npm:qs@4.0.0",
       "warning": "npm:warning@2.1.0"
     },
@@ -290,6 +292,10 @@ System.config({
     },
     "npm:invariant@2.1.1": {
       "loose-envify": "npm:loose-envify@1.0.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:invariant@2.1.2": {
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:js-tokens@1.0.1": {
@@ -306,6 +312,12 @@ System.config({
     },
     "npm:loose-envify@1.0.0": {
       "js-tokens": "npm:js-tokens@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "stream": "github:jspm/nodelibs-stream@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:loose-envify@1.1.0": {
+      "js-tokens": "npm:js-tokens@1.0.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
@@ -378,9 +390,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "redux": "npm:redux@3.0.2"
     },
-    "npm:react-router@1.0.0-rc3": {
-      "history": "npm:history@1.12.3",
-      "invariant": "npm:invariant@2.1.1",
+    "npm:react-router@1.0.0-rc4": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "history": "npm:history@1.13.0",
+      "invariant": "npm:invariant@2.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
     },
     "npm:react@0.14.0": {
@@ -472,7 +487,7 @@ System.config({
       "indexof": "npm:indexof@0.0.1"
     },
     "npm:warning@2.1.0": {
-      "loose-envify": "npm:loose-envify@1.0.0",
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
