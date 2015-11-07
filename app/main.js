@@ -36,8 +36,8 @@ class Househunt extends React.Component {
       body: JSON.stringify({ crawlUrl: url }),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }).then((r) => r.json()).then((response) => {
       console.log('add house response', response);
       this.props.dispatch(updateHouseData(url, response.address));
