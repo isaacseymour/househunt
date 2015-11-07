@@ -8,7 +8,7 @@ import AddDestination from '../components/add-destination';
 
 test('AddDestination component', (t) => {
   dom();
-  t.plan(1);
+  t.plan(2);
   const callback = (postcode) => {
     t.equal(postcode, 'WC1X 9QZ');
   };
@@ -24,4 +24,6 @@ test('AddDestination component', (t) => {
 
   const form = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'form');
   ReactTestUtils.Simulate.submit(ReactDOM.findDOMNode(form));
+
+  t.equal(textNode.value, '');
 });

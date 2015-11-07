@@ -27,6 +27,6 @@ export function updateHouseData(url, address) {
   return {
     type: UPDATE_HOUSE_DATA,
     url,
-    address
+    address,
   };
 }

@@ -13,6 +13,7 @@ export default class AddDestination extends React.Component {
   submit(event) {
     event.preventDefault();
     this.props.addDestinationCallback(this.state.postcodeInput);
+    this.setState({ postcodeInput: '' });
   }
 
   render() {
@@ -22,7 +23,7 @@ export default class AddDestination extends React.Component {
           <div className="row">
             <div className="input-field col s12">
               <input type="text"
-                     value={this.state.urlInput}
+                     value={this.state.postcodeInput}
                      onChange={(event) => this.handleChange(event)} />
               <label>Postcode</label>
             </div>

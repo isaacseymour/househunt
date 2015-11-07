@@ -13,7 +13,7 @@ import {
   addDestinationReducer,
   deleteDestinationReducer,
   addHouseReducer,
-  updateHouseDataReducer
+  updateHouseDataReducer,
 } from '../reducers';
 
 test('adding destination', (t) => {
@@ -51,12 +51,12 @@ test('updating a house', (t) => {
   const initState = {
     houses: Map({
       [uuid.v1()]: Map({ url: rightmoveUrl }),
-    })
+    }),
   };
   const newState = updateHouseDataReducer(initState, updateHouseData(rightmoveUrl, '6 Sanders House'));
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: rightmoveUrl,
-    address: '6 Sanders House'
+    address: '6 Sanders House',
   }).toJS());
   t.end();
 });

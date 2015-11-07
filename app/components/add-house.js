@@ -13,6 +13,7 @@ export default class AddHouse extends React.Component {
   submit(event) {
     event.preventDefault();
     this.props.addHouseCallback(this.state.urlInput);
+    this.setState({ urlInput: '' });
   }
 
   render() {
