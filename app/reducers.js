@@ -4,7 +4,9 @@ import {
   DELETE_DESTINATION,
   ADD_HOUSE,
   UPDATE_HOUSE_DATA,
+  UPDATE_DESTINATION_DATA,
 } from './actions';
+
 import uuid from 'uuid';
 
 // State looks like:
@@ -70,6 +72,17 @@ export function updateHouseDataReducer(state, action) {
   return Object.assign({}, state, { houses });
 }
 
+export function updateDestinationDataReducer(state, action) {
+  const destToUpdateUuid = state.destinations.findKey((dest) => dest.get('postcode') === action.postcode);
+  const destination = state.destinations.get(destToUpdateUuid);
+  const destinations = state.destinations.set(destToUpdateUuid, destination.merge({
+    latitude: action.lat,
+    longitude: action.lng,
+  }));
+
+  return Object.assign({}, state, { destinations });
+}
+
 export function househuntApp(state = initialState, action) {
   switch(action.type) {
     case ADD_DESTINATION:
@@ -80,6 +93,9 @@ export function househuntApp(state = initialState, action) {
       return addHouseReducer(state, action);
     case UPDATE_HOUSE_DATA:
       return updateHouseDataReducer(state, action);
+    case UPDATE_DESTINATION_DATA:
+      return updateDestinationDataReducer(state, action);
+
     default:
       return state;
   }
