@@ -25,18 +25,20 @@ store.subscribe(() => console.log('store change', store.getState()));
 
 class Househunt extends React.Component {
   addDestinationCallback(postcode) {
-    this.props.dispatch(addDestination(postcode));
+    const action = addDestination(postcode);
+    this.props.dispatch(action);
     geocode(postcode).then((data) => {
-      this.props.dispatch(updateDestinationData(postcode, data.lat(), data.lng()));
+      this.props.dispatch(updateDestinationData(action.id, data.lat(), data.lng()));
     });
   }
 
-  deleteDestinationCallback(uuid) {
-    this.props.dispatch(deleteDestination(uuid));
+  deleteDestinationCallback(id) {
+    this.props.dispatch(deleteDestination(id));
   }
 
   addHouseCallback(url) {
-    this.props.dispatch(addHouse(url));
+    const action = addHouse(url);
+    this.props.dispatch(action);
     fetch('/crawl', {
       method: 'POST',
       body: JSON.stringify({ crawlUrl: url }),
@@ -44,12 +46,13 @@ class Househunt extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then((r) => r.json()).then((response) => {
+    })
+    .then((r) => r.json())
+    .then((response) => {
       console.log('add house response', response);
-      this.props.dispatch(updateHouseData(url, response.address));
-    }).catch((err) => {
-      console.log('add house err', err);
-    });
+      this.props.dispatch(updateHouseData(action.id, response.address));
+    })
+    .catch((err) => console.log('add house err', err));
   }
 
   render() {
@@ -65,7 +68,7 @@ class Househunt extends React.Component {
 
           <div className="col s6 offset-s2">
             <ListDestinations
-              deleteDestinationCallback={(uuid) => this.deleteDestinationCallback(uuid)}
+              deleteDestinationCallback={(id) => this.deleteDestinationCallback(id)}
               destinations={this.props.destinations}
             />
           </div>
