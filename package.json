@@ -4,7 +4,7 @@
   "description": "Find a nice house",
   "main": "index.js",
   "scripts": {
-    "test": "babel-tape-runner app/test/*-test.js | faucet",
+    "test": "babel-tape-runner **/test/*-test.js | faucet",
     "lint": "eslint .",
     "ci": "npm test && npm run lint",
     "start": "babel-node server.js"
@@ -51,5 +51,10 @@
       "babel-runtime": "npm:babel-runtime@^5.8.24",
       "core-js": "npm:core-js@^1.1.4"
     }
+  },
+  "devDependencies": {
+    "fs-readfile-promise": "^2.0.1",
+    "nock": "^2.17.0",
+    "supertest": "^1.1.0"
   }
 }
