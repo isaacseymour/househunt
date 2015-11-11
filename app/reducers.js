@@ -7,15 +7,13 @@ import {
   UPDATE_DESTINATION_DATA,
 } from './actions';
 
-import uuid from 'uuid';
-
 // State looks like:
 // {
 //   destinations: {
 //     uuid: {
 //       postcode,
-//       latitude,
-//       longitude,
+//       lat,
+//       lng,
 //     },
 //     ...
 //   },
@@ -39,46 +37,38 @@ import uuid from 'uuid';
 
 const initialState = {
   destinations: Map({
-    [uuid.v1()]: Map({ postcode: 'WC1X 9QZ' }),
+    specialId: Map({ postcode: 'WC1X 9QZ' }),
   }),
   houses: Map(),
   commutes: Map(),
 };
 
-export function addDestinationReducer(state, action) {
-  const destinations = state.destinations.set(uuid.v1(), Map({
-    postcode: action.postcode,
-  }));
+export function addDestinationReducer(state, { id, postcode }) {
+  const destinations = state.destinations.set(id, Map({ postcode }));
 
   return Object.assign({}, state, { destinations });
 }
 
-export function deleteDestinationReducer(state, action) {
+export function deleteDestinationReducer(state, { id }) {
   return Object.assign({}, state, {
-    destinations: state.destinations.delete(action.uuid),
+    destinations: state.destinations.delete(id),
   });
 }
 
-export function addHouseReducer(state, action) {
-  const houses = state.houses.set(uuid.v1(), Map({ url: action.url }));
+export function addHouseReducer(state, { id, url }) {
+  const houses = state.houses.set(id, Map({ url: url }));
 
   return Object.assign({}, state, { houses });
 }
 
-export function updateHouseDataReducer(state, action) {
-  const houseToUpdateUuid = state.houses.findKey((house) => house.get('url') === action.url);
-  const houses = state.houses.setIn([houseToUpdateUuid, 'address'], action.address);
+export function updateHouseDataReducer(state, { id, address, imageUrl }) {
+  const houses = state.houses.mergeIn([id], { address, imageUrl });
 
   return Object.assign({}, state, { houses });
 }
 
-export function updateDestinationDataReducer(state, action) {
-  const destToUpdateUuid = state.destinations.findKey((dest) => dest.get('postcode') === action.postcode);
-  const destination = state.destinations.get(destToUpdateUuid);
-  const destinations = state.destinations.set(destToUpdateUuid, destination.merge({
-    latitude: action.lat,
-    longitude: action.lng,
-  }));
+export function updateDestinationDataReducer(state, { id, lat, lng }) {
+  const destinations = state.destinations.mergeIn([id], { lat, lng });
 
   return Object.assign({}, state, { destinations });
 }

@@ -49,32 +49,37 @@ test('adding house', (t) => {
 });
 
 test('updating a house', (t) => {
-  const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
+  const id = uuid.v1();
   const initState = {
     houses: Map({
-      [uuid.v1()]: Map({ url: rightmoveUrl }),
+      [id]: Map({ url: 'thing' }),
     }),
   };
-  const newState = updateHouseDataReducer(initState, updateHouseData(rightmoveUrl, '6 Sanders House'));
+  const action = updateHouseData(id, '6 Sanders House', 'https://media.com/thing.png');
+  const newState = updateHouseDataReducer(initState, action);
   t.deepEqual(newState.houses.first().toJS(), Map({
-    url: rightmoveUrl,
+    url: 'thing',
     address: '6 Sanders House',
+    imageUrl: 'https://media.com/thing.png',
   }).toJS());
   t.end();
 });
 
 test('updating a destination', (t) => {
   t.plan(1);
+  const id = uuid.v1();
   const initState = {
     destinations: Map({
-      [uuid.v1()]: Map({ postcode: 'E1 5QY' }),
+      [id]: Map({ postcode: 'E1 5QY' }),
     }),
   };
 
-  const newState = updateDestinationDataReducer(initState, updateDestinationData('E1 5QY', 1, 2));
+  const action = updateDestinationData(id, 1, 2);
+  const newState = updateDestinationDataReducer(initState, action);
+
   t.deepEqual(newState.destinations.first().toJS(), {
     postcode: 'E1 5QY',
-    latitude: 1,
-    longitude: 2,
+    lat: 1,
+    lng: 2,
   });
 });

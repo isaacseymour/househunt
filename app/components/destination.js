@@ -7,11 +7,11 @@ export default class Destination extends React.Component {
   }
 
   renderLatLng() {
-    if (!this.props.destination.get('latitude')) return null;
+    if (!this.props.destination.get('lat')) return null;
 
     return (
       <span>
-        ({ this.props.destination.get('latitude') }, { this.props.destination.get('longitude') })
+        ({ this.props.destination.get('lat') }, { this.props.destination.get('lng') })
       </span>
     );
   }
