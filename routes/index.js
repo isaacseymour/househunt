@@ -39,11 +39,13 @@ router.post('/crawl', (req, res) => {
 
     const body = cheerio.load(rawBody);
     const address = body("address").first().text();
+    const imageUrl = body("div.gallery img").first().attr("src");
 
     if(address !== '') {
       return res.json({
         crawlUrl,
         address,
+        imageUrl,
       });
     } else {
       return res.json({
