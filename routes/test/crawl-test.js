@@ -11,7 +11,7 @@ test('crawling something other than rightmove', (t) => {
   crawl('https://lol.com/something')
     .then((response) => t.end(`responded with ${response} instead of an error!`))
     .catch(({ status, message }) => {
-      t.equal(status, 200);
+      t.equal(status, 400);
       t.equal(message, 'must be a Rightmove link');
     });
 });
@@ -26,7 +26,7 @@ test('when Rightmove 404s', (t) => {
   crawl('https://rightmove.co.uk/lolno.html')
     .then((response) => t.end(`responded with ${response} instead of an error!`))
     .catch(({ status, message }) => {
-      t.equal(status, 200);
+      t.equal(status, 404);
       t.equal(message, 'error from Rightmove');
     });
 });

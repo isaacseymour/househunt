@@ -10,6 +10,7 @@ import {
   addDestination,
   deleteDestination,
   addHouse,
+  deleteHouse,
   updateHouseData,
   updateDestinationData,
 } from './actions';
@@ -50,9 +51,19 @@ class Househunt extends React.Component {
     .then((r) => r.json())
     .then((response) => {
       console.log('add house response', response);
+      if(response.error !== undefined) throw response;
+
       this.props.dispatch(updateHouseData(action.id, response.address));
     })
-    .catch((err) => console.log('add house err', err));
+    .catch((error) => {
+      console.log('add house error', error);
+      // TODO: tell the user what's wrong somehow
+      this.props.dispatch(deleteHouse(action.id));
+    });
+  }
+
+  deleteHouseCallback(id) {
+    this.props.dispatch(deleteHouse(id));
   }
 
   render() {
@@ -83,7 +94,10 @@ class Househunt extends React.Component {
           </div>
 
           <div className="col s6 offset-s2">
-            <ListHouses houses={this.props.houses} />
+            <ListHouses
+              deleteHouseCallback={(id) => this.deleteHouseCallback(id)}
+              houses={this.props.houses}
+            />
           </div>
         </div>
       </div>

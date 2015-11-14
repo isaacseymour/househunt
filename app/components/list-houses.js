@@ -6,7 +6,11 @@ export default class ListHouses extends React.Component {
     return this.props.houses.map((house, uuid) => {
       return (
         <li key={uuid} className="collection-item">
-          <House house={house} uuid={uuid} />
+          <House
+            deleteHouseCallback={this.props.deleteHouseCallback}
+            house={house}
+            uuid={uuid}
+          />
         </li>
       );
     }).toList();
