@@ -6,6 +6,7 @@ import {
   addDestination,
   deleteDestination,
   addHouse,
+  deleteHouse,
   updateHouseData,
   updateDestinationData,
 } from '../actions';
@@ -14,6 +15,7 @@ import {
   addDestinationReducer,
   deleteDestinationReducer,
   addHouseReducer,
+  deleteHouseReducer,
   updateHouseDataReducer,
   updateDestinationDataReducer,
 } from '../reducers';
@@ -45,6 +47,15 @@ test('adding house', (t) => {
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: rightmoveUrl,
   }).toJS());
+  t.end();
+});
+
+test('removing a house', (t) => {
+  const initState = {
+    houses: Map({ 'abc': Map() }),
+  };
+  const newState = deleteHouseReducer(initState, deleteHouse('abc'));
+  t.ok(newState.houses.isEmpty());
   t.end();
 });
 

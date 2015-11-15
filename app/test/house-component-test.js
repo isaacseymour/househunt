@@ -39,6 +39,22 @@ test('House component with the house loaded', (t) => {
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
   t.ok(ReactDOM.findDOMNode(element).textContent.indexOf(house.get('address')) > -1);
-  // TODO: scrape the image
-  // t.ok(element.getDOMNode().innerHTML.indexOf(house.get('imageUrl')) > -1);
+});
+
+test('Deleting the house', (t) => {
+  dom();
+  t.plan(1);
+
+  const house = Map({ url: rightmoveUrl, address: 'Goswell Road, EC1V' });
+  const callback = (id) => t.equal(id, 'abc123');
+
+  const result = ReactTestUtils.renderIntoDocument(
+    <House
+      house={house} uuid='abc123'
+      deleteHouseCallback={callback}
+    />
+  );
+
+  const link = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'a');
+  ReactTestUtils.Simulate.click(link);
 });

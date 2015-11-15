@@ -3,6 +3,7 @@ import {
   ADD_DESTINATION,
   DELETE_DESTINATION,
   ADD_HOUSE,
+  DELETE_HOUSE,
   UPDATE_HOUSE_DATA,
   UPDATE_DESTINATION_DATA,
 } from './actions';
@@ -61,6 +62,12 @@ export function addHouseReducer(state, { id, url }) {
   return Object.assign({}, state, { houses });
 }
 
+export function deleteHouseReducer(state, { id }) {
+  return Object.assign({}, state, {
+    houses: state.houses.delete(id),
+  });
+}
+
 export function updateHouseDataReducer(state, { id, address, imageUrl }) {
   const houses = state.houses.mergeIn([id], { address, imageUrl });
 
@@ -81,6 +88,8 @@ export function househuntApp(state = initialState, action) {
       return deleteDestinationReducer(state, action);
     case ADD_HOUSE:
       return addHouseReducer(state, action);
+    case DELETE_HOUSE:
+      return deleteHouseReducer(state, action);
     case UPDATE_HOUSE_DATA:
       return updateHouseDataReducer(state, action);
     case UPDATE_DESTINATION_DATA:

@@ -19,14 +19,16 @@ function urlIsValid(urlString) {
 
 function checkUrl(crawlUrl) {
   if(!urlIsValid(crawlUrl)) {
-    return Promise.reject({ status: 200, message: 'must be a Rightmove link' });
+    return Promise.reject({ status: 400, message: 'must be a Rightmove link' });
   } else {
     return Promise.resolve(crawlUrl);
   }
 }
 
 function checkRightmoveResponse(response) {
-  if(response.status !== 200) throw { status: 200, message: "error from Rightmove" };
+  if(response.status !== 200) {
+    throw { status: response.status, message: "error from Rightmove" };
+  }
 
   return response.text();
 }

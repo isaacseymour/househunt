@@ -26,6 +26,14 @@ export function addHouse(url) {
   };
 }
 
+export const DELETE_HOUSE = 'DELETE_HOUSE';
+export function deleteHouse(id) {
+  return {
+    type: DELETE_HOUSE,
+    id,
+  };
+}
+
 export const UPDATE_HOUSE_DATA = 'UPDATE_HOUSE_DATA';
 export function updateHouseData(id, address, imageUrl) {
   return {
