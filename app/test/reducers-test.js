@@ -3,9 +3,9 @@ import uuid from 'uuid';
 import { Map } from 'immutable';
 
 import {
-  addDestination,
+  requestDestination,
   deleteDestination,
-  addHouse,
+  requestHouse,
   deleteHouse,
   updateHouseData,
   updateDestinationData,
@@ -22,7 +22,7 @@ import {
 
 test('adding destination', (t) => {
   const initState = { destinations: Map() };
-  const newState = addDestinationReducer(initState, addDestination('WC1X 9QZ'));
+  const newState = addDestinationReducer(initState, requestDestination('id', 'WC1X 9QZ'));
   t.equal(newState.destinations.size, 1);
   t.deepEqual(newState.destinations.first().toJS(), Map({
     postcode: 'WC1X 9QZ',
@@ -42,7 +42,7 @@ test('removing a destination', (t) => {
 test('adding house', (t) => {
   const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
   const initState = { houses: Map() };
-  const newState = addHouseReducer(initState, addHouse(rightmoveUrl));
+  const newState = addHouseReducer(initState, requestHouse('id', rightmoveUrl));
   t.equal(newState.houses.size, 1);
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: rightmoveUrl,
