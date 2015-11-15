@@ -28,7 +28,7 @@ class Househunt extends React.Component {
   addDestinationCallback(postcode) {
     const action = addDestination(postcode);
     this.props.dispatch(action);
-    geocode(postcode).then((data) => {
+    geocode(google, postcode).then((data) => {
       this.props.dispatch(updateDestinationData(action.id, data.lat(), data.lng()));
     });
   }
