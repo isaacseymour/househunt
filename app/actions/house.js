@@ -3,9 +3,6 @@ import fetch from 'isomorphic-fetch';
 import geocode from '../services/geocode';
 import { updateCommutes } from './commute';
 
-export const ADD_HOUSE = 'ADD_HOUSE';
-export const requestHouse = (id, url) => ({ type: ADD_HOUSE, id, url });
-
 export const addHouse = (url) => (dispatch) => {
   const id = uuid.v1();
 
@@ -38,6 +35,9 @@ export const addHouse = (url) => (dispatch) => {
     })
     .then(() => dispatch(updateCommutes));
 };
+
+export const REQUEST_HOUSE = 'REQUEST_HOUSE';
+export const requestHouse = (id, url) => ({ type: REQUEST_HOUSE, id, url });
 
 export const DELETE_HOUSE = 'DELETE_HOUSE';
 export const deleteHouse = (id) => (dispatch) => {

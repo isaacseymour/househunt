@@ -45,7 +45,7 @@ export const REQUEST_COMMUTE = 'REQUEST_COMMUTE';
 export const requestCommute = (id) => ({ type: REQUEST_COMMUTE, id });
 
 export const POPULATE_COMMUTE = 'POPULATE_COMMUTE';
-export const populateCommute = (id) => (commutes) => ({
+const populateCommute = (id) => (commutes) => ({
   type: POPULATE_COMMUTE,
   id,
   commutes,
