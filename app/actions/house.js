@@ -46,7 +46,7 @@ export const deleteHouse = (id) => (dispatch) => {
 };
 
 export const UPDATE_HOUSE_DATA = 'UPDATE_HOUSE_DATA';
-export const updateHouseData = (id, data) => Object.assign(
-  { type: UPDATE_HOUSE_DATA, id },
-  data);
+export const updateHouseData = (id, data) => {
+  return Object.assign({ type: UPDATE_HOUSE_DATA, id }, data);
+}
 
