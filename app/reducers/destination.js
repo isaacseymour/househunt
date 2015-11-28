@@ -5,13 +5,15 @@ import {
   UPDATE_DESTINATION_DATA,
 } from '../actions/destination';
 
-const addDestinationReducer = (destinations, { id, postcode }) =>
-  destinations.set(id, Map({ postcode }));
+const addDestinationReducer = (destinations, { id, postcode }) => {
+  return destinations.set(id, Map({ postcode }));
+};
 
 const deleteDestinationReducer = (destinations, { id }) => destinations.delete(id);
 
-const updateDestinationDataReducer = (destinations, { id, lat, lng }) =>
-  destinations.mergeIn([id], { lat, lng });
+const updateDestinationDataReducer = (destinations, { id, lat, lng }) => {
+  return destinations.mergeIn([id], { lat, lng });
+};
 
 export default function destinationReducer(state = Map(), action) {
   switch(action.type) {

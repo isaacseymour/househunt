@@ -3,8 +3,7 @@ import { REQUEST_COMMUTE, POPULATE_COMMUTE, DELETE_COMMUTE } from '../actions/co
 
 const requestCommuteReducer = (commutes, { id }) => commutes.set(id, Map({}));
 
-const populateCommuteReducer =
-  (state, { id, commutes }) => state.mergeIn([id], commutes);
+const populateCommuteReducer = (state, { id, commutes }) => state.mergeIn([id], commutes);
 
 const deleteCommuteReducer = (commutes, { id }) => commutes.delete(id);
 

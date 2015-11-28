@@ -32,15 +32,6 @@ export const updateCommutes = (dispatch, getState) => {
   return {};
 };
 
-export const addCommute = (id, house, destination) => (dispatch) => {
-  const from = { lat: house.get('lat'), lng: house.get('lng') },
-        to   = { lat: destination.get('lat'), lng: destination.get('lng') };
-
-  directions(google, from, to).then(populateCommute(id)).then(dispatch);
-
-  return {};
-};
-
 export const REQUEST_COMMUTE = 'REQUEST_COMMUTE';
 export const requestCommute = (id) => ({ type: REQUEST_COMMUTE, id });
 
@@ -50,6 +41,15 @@ const populateCommute = (id) => (commutes) => ({
   id,
   commutes,
 });
+
+export const addCommute = (id, house, destination) => (dispatch) => {
+  const from = { lat: house.get('lat'), lng: house.get('lng') },
+        to   = { lat: destination.get('lat'), lng: destination.get('lng') };
+
+  directions(google, from, to).then(populateCommute(id)).then(dispatch);
+
+  return {};
+};
 
 export const DELETE_COMMUTE = 'DELETE_COMMUTE';
 export const deleteCommute = (id) => ({ type: DELETE_COMMUTE, id });

@@ -46,7 +46,6 @@ test('removing a house', (t) => {
     houses: Map({ 'abc': Map() }),
   };
   const newState = reducer(initState, { type: DELETE_HOUSE, id: 'abc' });
-  console.log(initState, newState);
   t.ok(newState.houses.isEmpty());
   t.end();
 });
