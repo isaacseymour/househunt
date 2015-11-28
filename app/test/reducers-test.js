@@ -4,10 +4,10 @@ import { Map } from 'immutable';
 
 import {
   requestDestination,
-  deleteDestination,
+  DELETE_DESTINATION,
   updateDestinationData,
 } from '../actions/destination';
-import { requestHouse, deleteHouse, updateHouseData } from '../actions/house';
+import { requestHouse, DELETE_HOUSE, updateHouseData } from '../actions/house';
 
 import reducer from '../reducers';
 
@@ -25,7 +25,7 @@ test('removing a destination', (t) => {
   const initState = {
     destinations: Map({ 'abc': Map() }),
   };
-  const newState = reducer(initState, deleteDestination('abc'));
+  const newState = reducer(initState, { type: DELETE_DESTINATION, id: 'abc' });
   t.ok(newState.destinations.isEmpty());
   t.end();
 });
@@ -45,7 +45,7 @@ test('removing a house', (t) => {
   const initState = {
     houses: Map({ 'abc': Map() }),
   };
-  const newState = reducer(initState, deleteHouse('abc'));
+  const newState = reducer(initState, { type: DELETE_HOUSE, id: 'abc' });
   console.log(initState, newState);
   t.ok(newState.houses.isEmpty());
   t.end();
@@ -58,11 +58,16 @@ test('updating a house', (t) => {
       [id]: Map({ url: 'thing' }),
     }),
   };
-  const action = updateHouseData(id, '6 Sanders House', 'https://media.com/thing.png');
+  const action = updateHouseData(id, {
+    address: '6 Sanders House',
+    imageUrl: 'https://media.com/thing.png',
+  });
   const newState = reducer(initState, action);
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: 'thing',
     address: '6 Sanders House',
+    lat: undefined,
+    lng: undefined,
     imageUrl: 'https://media.com/thing.png',
   }).toJS());
   t.end();
