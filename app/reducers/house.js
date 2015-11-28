@@ -1,11 +1,11 @@
 import { Map } from 'immutable';
 import { REQUEST_HOUSE, DELETE_HOUSE, UPDATE_HOUSE_DATA } from '../actions/house';
 
-export const requestHouseReducer = (houses, { id, url }) => houses.set(id, Map({ url }));
+const requestHouseReducer = (houses, { id, url }) => houses.set(id, Map({ url }));
 
-export const deleteHouseReducer = (houses, { id }) => houses.delete(id);
+const deleteHouseReducer = (houses, { id }) => houses.delete(id);
 
-export function updateHouseDataReducer(houses, { id, address, imageUrl, lat, lng }) {
+function updateHouseDataReducer(houses, { id, address, imageUrl, lat, lng }) {
   const merger = (prev, next) => next || prev;
   const updater = (house) => house.mergeWith(merger, { address, imageUrl, lat, lng });
   return houses.update(id, updater);
