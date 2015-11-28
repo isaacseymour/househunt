@@ -8,7 +8,8 @@ function mockGoogle(responses, paramsAssertions) {
   return { maps: apis };
 }
 
-const from = { lat: 1, lng: 2 }, to = { lat: 3, lng: 4 };
+const from = { lat: 1, lng: 2 };
+const to = { lat: 3, lng: 4 };
 
 test('when directions are found for all travel modes', (t) => {
   t.plan(9);
