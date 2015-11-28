@@ -8,19 +8,16 @@ function mockGoogle(responses, paramsAssertions) {
   return { maps: apis };
 }
 
-const from = { lat: 1, lng: 2 };
-const to = { lat: 3, lng: 4 };
+const from = 'from', to = 'to';
 
 test('when directions are found for all travel modes', (t) => {
-  t.plan(9);
+  t.plan(5);
 
   const responses = { WALKING: 100, TRANSIT: 100 };
 
   const google = mockGoogle(responses, (params) => {
-    t.equal(params.origin.lat(), from.lat);
-    t.equal(params.origin.lng(), from.lng);
-    t.equal(params.destination.lat(), to.lat);
-    t.equal(params.destination.lng(), to.lng);
+    t.equal(params.origin, from);
+    t.equal(params.destination, to);
   });
 
   directions(google, from, to)
@@ -29,7 +26,7 @@ test('when directions are found for all travel modes', (t) => {
 });
 
 test('when no directions are available', (t) => {
-  t.plan(9);
+  t.plan(5);
 
   const responses = {
     WALKING: 'ZERO_RESULTS',
@@ -37,10 +34,8 @@ test('when no directions are available', (t) => {
   };
 
   const google = mockGoogle(responses, (params) => {
-    t.equal(params.origin.lat(), from.lat);
-    t.equal(params.origin.lng(), from.lng);
-    t.equal(params.destination.lat(), to.lat);
-    t.equal(params.destination.lng(), to.lng);
+    t.equals(params.origin, from);
+    t.equals(params.destination, to);
   });
 
   directions(google, from, to)
@@ -52,7 +47,7 @@ test('when no directions are available', (t) => {
 
 
 test('when some directions are available', (t) => {
-  t.plan(9);
+  t.plan(5);
 
   const responses = {
     WALKING: 100,
@@ -60,10 +55,8 @@ test('when some directions are available', (t) => {
   };
 
   const google = mockGoogle(responses, (params) => {
-    t.equal(params.origin.lat(), from.lat);
-    t.equal(params.origin.lng(), from.lng);
-    t.equal(params.destination.lat(), to.lat);
-    t.equal(params.destination.lng(), to.lng);
+    t.equals(params.origin, from);
+    t.equals(params.destination, to);
   });
 
   const expectedResults = Object.assign({}, responses, { TRANSIT: 'Error: ZERO_RESULTS' });

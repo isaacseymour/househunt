@@ -1,14 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import Househunt from './components/househunt';
 
-import reducer from './reducers';
+import { househuntApp } from './reducers';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider, connect } from 'react-redux';
 
-const store = applyMiddleware(thunkMiddleware)(createStore)(reducer);
+const store = applyMiddleware(thunkMiddleware)(createStore)(househuntApp);
 store.subscribe(() => console.log('store change', store.getState()));
 
 const ConnectedHousehunt = connect((state) => state)(Househunt);

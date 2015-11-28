@@ -4,8 +4,7 @@ import ListDestinations from './list-destinations';
 import AddHouse from './add-house';
 import ListHouses from './list-houses';
 
-import { addDestination, deleteDestination } from '../actions/destination';
-import { addHouse, deleteHouse } from '../actions/house';
+import { addDestination, deleteDestination, addHouse, deleteHouse } from '../actions';
 
 export default class Househunt extends React.Component {
   addDestinationCallback(postcode) {

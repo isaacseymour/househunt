@@ -40,7 +40,6 @@
       "fetch": "npm:whatwg-fetch@^0.10.1",
       "immutable": "npm:immutable@^3.7.4",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.2.0",
-      "lodash": "npm:lodash@^3.10.1",
       "react": "npm:react@0.14.2",
       "react-dom": "npm:react-dom@0.14.2",
       "react-redux": "npm:react-redux@4",
@@ -59,7 +58,6 @@
   "devDependencies": {
     "fs-readfile-promise": "^2.0.1",
     "nock": "^2.17.0",
-    "redux": "^3.0.4",
     "supertest": "^1.1.0"
   }
 }

@@ -1,10 +1,8 @@
 import _ from 'lodash';
 
 // Returns a promise which resolves to the estimated travel time for each mode in seconds
-export default function directions(google, { lat: fromLat, lng: fromLng }, { lat: toLat, lng: toLng }) {
-  const travelModes = Object.keys(google.maps.TravelMode);
-  const from = new google.maps.LatLng(fromLat, fromLng),
-        to = new google.maps.LatLng(toLat, toLng);
+export default function directions(google, from, to) {
+  const travelModes = Object.keys(google.maps.TravelModes);
 
   return Promise
     .all(travelModes.map((mode) => directionsForMode(google, from, to, mode)))
