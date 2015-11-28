@@ -23,10 +23,10 @@ import houseReducer from './reducers/house';
 //   },
 //   commutes: {
 //     `${house-uuid}.${destination-uuid}`:{
-//       walking,
-//       cycling,
-//       transit,
-//       driving,
+//       WALKING,
+//       CYCLING,
+//       TRANSIT,
+//       DRIVING,
 //     },
 //     ...
 //   },
