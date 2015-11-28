@@ -20,6 +20,7 @@ System.config({
     "fetch": "npm:whatwg-fetch@0.10.1",
     "immutable": "npm:immutable@3.7.5",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.0",
+    "lodash": "npm:lodash@3.10.1",
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react-dom@0.14.0",
     "react-redux": "npm:react-redux@3.1.0",
@@ -355,6 +356,9 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "source-map": "npm:source-map@0.1.31"
+    },
+    "npm:lodash@3.10.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:loose-envify@1.0.0": {
       "js-tokens": "npm:js-tokens@1.0.1",

@@ -8,6 +8,23 @@ export function dom() {
   };
 }
 
+class LatLng {
+  constructor(lat, lng) {
+    this._lat = lat;
+    this._lng = lng;
+  }
+
+  lat() {
+    return this._lat;
+  }
+  lng() {
+    return this._lng;
+  }
+  toObject() {
+    return { lat: this.lat(), lng: this.lng() };
+  }
+}
+
 export function mockDirections(responses, paramsAssertions) {
   class MockDirectionsService {
     route(params, callback) {
@@ -24,20 +41,14 @@ export function mockDirections(responses, paramsAssertions) {
   }
 
   return {
-    TravelModes: { WALKING: "WALKING", TRANSIT: "TRANSIT" },
+    LatLng,
+    TravelMode: { WALKING: "WALKING", TRANSIT: "TRANSIT" },
     DirectionsStatus: { OK: "OK", ZERO_RESULTS: "ZERO_RESULTS" },
     DirectionsService: MockDirectionsService,
   };
 }
 
 export function mockGeocoder(response, paramsAssertions) {
-  class LatLng {
-    constructor(lat, lng) {
-      this.lat = lat;
-      this.lng = lng;
-    }
-  }
-
   const GeocoderStatus = { ERROR: "ERROR", OK: "OK" };
 
   class Geocoder {
