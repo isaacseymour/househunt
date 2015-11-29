@@ -10,7 +10,15 @@ System.config({
   },
   paths: {
     "github:*": "jspm_packages/github/*",
-    "npm:*": "jspm_packages/npm/*"
+    "npm:*": "jspm_packages/npm/*",
+    "google-maps": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDJZsI0jHHDypothNKRq-E5C8OtdqTh3wg&libraries=places"
+  },
+
+  meta: {
+    "google-maps": {
+      "build": false,
+      "loader": "systemjs-googlemaps"
+    }
   },
 
   map: {
@@ -27,6 +35,7 @@ System.config({
     "react-router": "npm:react-router@1.0.0-rc4",
     "redux": "npm:redux@3.0.2",
     "redux-thunk": "npm:redux-thunk@1.0.0",
+    "systemjs-googlemaps": "github:HeinrichFilter/systemjs-plugin-googlemaps@master",
     "tape": "npm:tape@4.2.1",
     "uuid": "npm:uuid@2.0.1",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -171,8 +180,11 @@ System.config({
     },
     "npm:buffer@3.5.2": {
       "base64-js": "npm:base64-js@0.0.8",
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "ieee754": "npm:ieee754@1.1.6",
-      "is-array": "npm:is-array@1.0.1"
+      "is-array": "npm:is-array@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:cipher-base@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

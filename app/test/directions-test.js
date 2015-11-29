@@ -1,12 +1,7 @@
 import test from 'tape';
 import _ from 'lodash';
 import directions from '../services/directions';
-import { mockDirections } from './helpers';
-
-function mockGoogle(responses, paramsAssertions) {
-  const apis = mockDirections(responses, paramsAssertions);
-  return { maps: apis };
-}
+import { mockDirections } from '../maps';
 
 const from = { lat: 1, lng: 2 };
 const to = { lat: 3, lng: 4 };
@@ -16,14 +11,14 @@ test('when directions are found for all travel modes', (t) => {
 
   const responses = { WALKING: 100, TRANSIT: 100 };
 
-  const google = mockGoogle(responses, (params) => {
+  mockDirections(responses, (params) => {
     t.equal(params.origin.lat(), from.lat);
     t.equal(params.origin.lng(), from.lng);
     t.equal(params.destination.lat(), to.lat);
     t.equal(params.destination.lng(), to.lng);
   });
 
-  directions(google, from, to)
+  directions(from, to)
     .then((results) => t.deepEqual(results, responses))
     .catch(t.fail);
 });
@@ -36,14 +31,14 @@ test('when no directions are available', (t) => {
     TRANSIT: 'ZERO_RESULTS',
   };
 
-  const google = mockGoogle(responses, (params) => {
+  mockDirections(responses, (params) => {
     t.equal(params.origin.lat(), from.lat);
     t.equal(params.origin.lng(), from.lng);
     t.equal(params.destination.lat(), to.lat);
     t.equal(params.destination.lng(), to.lng);
   });
 
-  directions(google, from, to)
+  directions(from, to)
     .then((results) => {
       t.deepEqual(results, _.mapValues(responses, (value) => `Error: ${value}`));
     })
@@ -59,7 +54,7 @@ test('when some directions are available', (t) => {
     TRANSIT: 'ZERO_RESULTS',
   };
 
-  const google = mockGoogle(responses, (params) => {
+  mockDirections(responses, (params) => {
     t.equal(params.origin.lat(), from.lat);
     t.equal(params.origin.lng(), from.lng);
     t.equal(params.destination.lat(), to.lat);
@@ -68,7 +63,7 @@ test('when some directions are available', (t) => {
 
   const expectedResults = Object.assign({}, responses, { TRANSIT: 'Error: ZERO_RESULTS' });
 
-  directions(google, from, to)
+  directions(from, to)
     .then((results) => t.deepEqual(results, expectedResults))
     .catch(t.fail);
 });

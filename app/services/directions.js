@@ -1,22 +1,22 @@
 import _ from 'lodash';
+import { TravelMode, LatLng, DirectionsStatus, DirectionsService } from '../maps';
+
+const travelModes = Object.keys(TravelMode);
+const directionsService = new DirectionsService();
 
 // Returns a promise which resolves to the estimated travel time for each mode in seconds
-export default function directions(google, { lat: fromLat, lng: fromLng }, { lat: toLat, lng: toLng }) {
-  const travelModes = Object.keys(google.maps.TravelMode);
-  const from = new google.maps.LatLng(fromLat, fromLng),
-        to = new google.maps.LatLng(toLat, toLng);
+export default function directions({ lat: fromLat, lng: fromLng }, { lat: toLat, lng: toLng }) {
+  const from = new LatLng(fromLat, fromLng);
+  const to = new LatLng(toLat, toLng);
 
   return Promise
-    .all(travelModes.map((mode) => directionsForMode(google, from, to, mode)))
+    .all(travelModes.map((mode) => directionsForMode(from, to, mode)))
     .then(_.zipObject);
 }
 
-function directionsForMode(google, from, to, mode) {
-  const { DirectionsStatus } = google.maps;
-  const DirectionsService = new google.maps.DirectionsService();
-
+function directionsForMode(from, to, mode) {
   return new Promise((resolve) => {
-    DirectionsService.route({
+    directionsService.route({
       origin: from,
       destination: to,
       travelMode: mode,

@@ -46,7 +46,7 @@ export const addCommute = (id, house, destination) => (dispatch) => {
   const from = { lat: house.get('lat'), lng: house.get('lng') },
         to   = { lat: destination.get('lat'), lng: destination.get('lng') };
 
-  directions(google, from, to).then(populateCommute(id)).then(dispatch);
+  directions(from, to).then(populateCommute(id)).then(dispatch);
 
   return {};
 };
