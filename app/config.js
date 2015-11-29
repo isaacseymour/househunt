@@ -24,6 +24,7 @@ System.config({
   map: {
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
+    "chai": "npm:chai@3.4.1",
     "core-js": "npm:core-js@1.2.1",
     "fetch": "npm:whatwg-fetch@0.10.1",
     "immutable": "npm:immutable@3.7.5",
@@ -186,6 +187,14 @@ System.config({
       "is-array": "npm:is-array@1.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:chai@3.4.1": {
+      "assertion-error": "npm:assertion-error@1.0.1",
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "deep-eql": "npm:deep-eql@0.1.3",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0",
+      "type-detect": "npm:type-detect@1.0.0"
+    },
     "npm:cipher-base@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "inherits": "npm:inherits@2.0.1",
@@ -236,6 +245,10 @@ System.config({
       "pbkdf2": "npm:pbkdf2@3.0.4",
       "public-encrypt": "npm:public-encrypt@2.0.1",
       "randombytes": "npm:randombytes@2.0.1"
+    },
+    "npm:deep-eql@0.1.3": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "type-detect": "npm:type-detect@0.1.1"
     },
     "npm:define-properties@1.1.1": {
       "foreach": "npm:foreach@2.0.5",
