@@ -9,12 +9,12 @@ export const requestDestination = (id, postcode) => ({
   postcode,
 });
 
-export const addDestination = (google, postcode) => (dispatch) => {
+export const addDestination = (postcode) => (dispatch) => {
   const id = uuid.v1();
 
   dispatch(requestDestination(id, postcode));
 
-  geocode(google, postcode)
+  geocode(postcode)
     .then((data) => dispatch(updateDestinationData(id, data.lat(), data.lng())))
     .then(() => dispatch(updateCommutes));
 };

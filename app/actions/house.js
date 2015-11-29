@@ -23,13 +23,13 @@ export const addHouse = (url) => (dispatch) => {
       const { address, imageUrl } = response;
       dispatch(updateHouseData(id, { address, imageUrl }));
 
-      return geocode(google, response.address)
-        .then((location) => ({ lat: location.lat(), lng: location.lng() }))
-        .then((location) => updateHouseData(id, location))
-        .then(dispatch);
+      return geocode(address);
     })
+    .then((location) => ({ lat: location.lat(), lng: location.lng() }))
+    .then((location) => updateHouseData(id, location))
+    .then(dispatch)
     .catch((error) => {
-      console.log('add house error', error);
+      console.warn('add house error', error);
       // TODO: tell the user what's wrong somehow
       dispatch(deleteHouse(id));
     })

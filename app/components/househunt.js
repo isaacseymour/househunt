@@ -9,7 +9,7 @@ import { addHouse, deleteHouse } from '../actions/house';
 
 export default class Househunt extends React.Component {
   addDestinationCallback(postcode) {
-    this.props.dispatch(addDestination(google, postcode));
+    this.props.dispatch(addDestination(postcode));
   }
 
   deleteDestinationCallback(id) {
