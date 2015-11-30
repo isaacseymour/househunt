@@ -15,7 +15,7 @@ const hasPassed = (result) => {
   const nestedFailed = result.nested.some((r) => hasPassed(r) === false);
   return result.passed && nestedFailed.length === 0;
 }
-const printResult = (result, indentLevel) => {
+const logResult = (result, indentLevel) => {
   const prefix = Array.from({ length: indentLevel }, () => '\t').join('');
   console.log(prefix, result.name, hasPassed(result) ? 'Success' : 'Fail');
   if (result.error) console.warn(prefix, result.error);
@@ -24,7 +24,7 @@ const printResult = (result, indentLevel) => {
 Promise.all(promises).then(() => {
   const results = processAssertions();
   results.forEach((result) => {
-    printResult(result, 0);
+    logResult(result, 0);
   });
 }).catch((e) => {
   console.log('Eror running tests', e);
