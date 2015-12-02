@@ -5,6 +5,8 @@ const makeId = () => idCounter++;
 
 let assertions = [];
 
+const resetDom = () => document.body.innerHTML = '';
+
 // has to be regular fn so it can be bound
 const describe = function(name, fn) {
   assertions.push({ id: makeId(), name, fn });
@@ -29,6 +31,8 @@ const processAssertion = (assertion) => {
   } catch(e) {
     passed = false;
     error = e;
+  } finally {
+    resetDom();
   }
 
   let newResult = {
