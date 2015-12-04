@@ -1,24 +1,16 @@
-import { expect } from 'chai';
-import { describe } from '../test';
+import {
+  describe,
+} from '../test-lib/main';
 
 const foo = (x, y) => x + y;
 
-describe('testing foo', () => {
-  describe('Adding 2 + 2', () => {
-    expect(foo(2, 2)).to.eql(4);
+describe('testing foo', (t) => {
+  t.assertEqual(1, 1);
+  t.describe('Adding 2 + 2', (t) => {
+    t.assertEqual(foo(2, 2), 4);
   });
 
-  describe('Adding 3 + 3', () => {
-    expect(foo(2, 3)).to.eql(6);
+  t.describe('Adding 1 + 1', (t) => {
+    t.assertEqual(foo(1, 1), 3);
   });
-
-  describe('another nested case', () => {
-    describe('well this is awks', () => {
-      expect(foo(1, 1)).to.eql(3);
-    });
-  });
-});
-
-describe('another test', () => {
-  expect(foo(1, 1)).to.eql(2);
 });

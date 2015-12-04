@@ -1,20 +1,13 @@
 import {
   assertions,
   processAssertions
-} from './test';
+} from './test-lib/main';
 
 const testFiles = [
-  'test/list-houses-component-test.js'
+  'test/foo-test.js'
 ];
 
 const promises = testFiles.map((f) => System.import(f));
-
-const hasPassed = (result) => {
-  if (result.nested.length === 0 && result.passed) return true;
-
-  const nestedFailed = result.nested.some((r) => hasPassed(r) === false);
-  return result.passed && nestedFailed === false;
-}
 
 const createResultUl = () => {
   const ul = document.createElement('ul');
@@ -22,38 +15,45 @@ const createResultUl = () => {
   return ul;
 }
 
+const renderAssertions = (result) => {
+  const wrap = document.createElement('ul');
+  result.assertions.forEach((assertion) => {
+    const assertionMessage = document.createElement('li');
+    assertionMessage.classList.add('assertion-message');
+
+    assertionMessage.textContent = `Assertion: ${assertion.message}`;
+    wrap.appendChild(assertionMessage);
+
+    if (assertion.error && assertion.error.stack) {
+      const preStack = document.createElement('pre');
+      preStack.classList.add('assertion-stack');
+      const codeStack = document.createElement('code');
+      codeStack.textContent = assertion.error.stack;
+      preStack.appendChild(codeStack);
+      wrap.appendChild(preStack);
+    }
+  });
+  return wrap;
+}
+
 const renderResult = (result) => {
   const li = document.createElement('li');
   const div = document.createElement('div');
   div.classList.add(
     'test-result',
-    `test-${hasPassed(result) ? 'success' : 'fail'}`
+    `test-${result.passed() ? 'success' : 'fail'}`
   );
 
   const innerContent = (() => {
     const span = document.createElement('span');
-    if (hasPassed(result)) {
-      span.textContent = result.name + ' passed!';
+    span.classList.add('describe-title');
+    if (result.passed()) {
+      span.textContent = `Describe: ${result.name} passed!`;
     } else {
-      const text = document.createTextNode(result.name + ' failed!');
-      span.appendChild(text);
-
-      if (result.error && result.error.message) {
-        const preMessage = document.createElement('pre');
-        const codeMessage = document.createElement('code');
-        codeMessage.textContent = result.error.message;
-        preMessage.appendChild(codeMessage);
-        span.appendChild(preMessage);
-      }
-
-      if (result.error && result.error.stack) {
-        const preStack = document.createElement('pre');
-        const codeStack = document.createElement('code');
-        codeStack.textContent = result.error.stack;
-        preStack.appendChild(codeStack);
-        span.appendChild(preStack);
-      }
+      span.textContent = `Describe: ${result.name} failed!`;
     }
+
+    span.appendChild(renderAssertions(result));
 
     return span;
   })();
@@ -85,7 +85,7 @@ const renderResults = (results) => {
 
 const logResult = (result, indentLevel) => {
   const prefix = Array.from({ length: indentLevel }, () => '\t').join('');
-  console.log(prefix, result.name, hasPassed(result) ? 'Success' : 'Fail');
+  console.log(prefix, result.name, result.passedString());
   if (result.error) console.warn(prefix, result.error);
   result.nested.forEach((result) => logResult(result, indentLevel + 1));
 };
@@ -93,9 +93,6 @@ const logResult = (result, indentLevel) => {
 Promise.all(promises).then(() => {
   const results = processAssertions();
   document.body.appendChild(renderResults(results));
-  // results.forEach((result) => {
-  //   logResult(result, 0);
-  // });
 }).catch((e) => {
   console.log('Eror running tests', e);
 });
