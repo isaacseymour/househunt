@@ -13,4 +13,9 @@ describe('testing foo', (t) => {
   t.describe('Adding 1 + 1', (t) => {
     t.assertEqual(foo(1, 1), 3);
   });
+
+  t.describe('Things are fine', (t) => {
+    t.ok(true);
+    t.ok(false);
+  });
 });

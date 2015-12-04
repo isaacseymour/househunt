@@ -21,9 +21,6 @@ const renderAssertions = (result) => {
     const assertionMessage = document.createElement('li');
     assertionMessage.classList.add('assertion-message');
 
-    assertionMessage.textContent = `Assertion: ${assertion.message}`;
-    wrap.appendChild(assertionMessage);
-
     if (assertion.error && assertion.error.stack) {
       const preStack = document.createElement('pre');
       preStack.classList.add('assertion-stack');
@@ -86,13 +83,21 @@ const renderResults = (results) => {
 const logResult = (result, indentLevel) => {
   const prefix = Array.from({ length: indentLevel }, () => '\t').join('');
   console.log(prefix, result.name, result.passedString());
-  if (result.error) console.warn(prefix, result.error);
+  result.assertions.forEach((a) => {
+    if (a.passed) return;
+    console.warn(prefix + '\t', a.error.stack);
+  });
   result.nested.forEach((result) => logResult(result, indentLevel + 1));
 };
 
 Promise.all(promises).then(() => {
   const results = processAssertions();
+  const message = document.createElement('p');
+  message.textContent = 'All errors are logged to the console for clickable stack traces!';
+  message.classList.add('top-message');
+  document.body.appendChild(message);
   document.body.appendChild(renderResults(results));
+  results.forEach((r) => logResult(r, 0));
 }).catch((e) => {
   console.log('Eror running tests', e);
 });

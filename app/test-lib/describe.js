@@ -1,4 +1,5 @@
-import { assertEqual } from './assertions';
+import { assertEqual, ok } from './assertions';
+import { expect } from 'chai';
 
 let counter = 0;
 
@@ -64,31 +65,35 @@ class Describe {
 
     return this;
   }
+}
 
-  assertEqual(x, y) {
+const wrapAssertion = (name, assertionFn) => {
+  Describe.prototype[name] = function(...args) {
     let passed = true;
     let error;
 
     try {
-      assertEqual(x, y);
-    } catch(e) {
+      assertionFn.apply(null, args);
+    } catch (e) {
       passed = false;
       error = e;
     }
 
-    this.assertions.push({
-      message: `Expected ${x} to equal ${y}`,
-      assertion: '==',
-      args: [x, y],
-      passed,
-      error
-    });
+    this.assertions.push({ passed, error });
   }
 }
+
+wrapAssertion('assertEqual', (x, y) => {
+  expect(x).to.equal(y);
+});
+
+wrapAssertion('ok', (x) => {
+  expect(x).to.be.ok;
+});
 
 const makeDescribe = (name, fn) => {
   return new Describe(name, fn);
 }
 
-export { makeDescribe };
+export { makeDescribe, wrapAssertion };
 
