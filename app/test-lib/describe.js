@@ -1,4 +1,5 @@
 import { assertEqual, ok } from './assertions';
+import isEqual from 'lodash.isequal';
 import { expect } from 'chai';
 
 let counter = 0;
@@ -12,7 +13,9 @@ class Describe {
     this.fn = fn;
     this.nested = [];
     this.assertions = [];
-    this.hasRun = false;
+    this.asyncCount = 0;
+    this.syncCount = 0;
+    this.ASYNC_TIMEOUT = 2000;
   }
 
   describe(name, fn) {
@@ -21,8 +24,14 @@ class Describe {
     return nested;
   }
 
+  async(num, syncNum) {
+    this.asyncCount = num;
+    this.syncCount = syncNum;
+  }
+
   passed() {
-    if (!this.hasRun) throw new Error('Describe hasn\'t run yet');
+    if (this.asyncError) return false;
+
     if (this.assertions.length === 0) {
       // if this describe has no direct assertions
       // we say it passed if all its nested ones passed
@@ -54,32 +63,69 @@ class Describe {
     }
   }
 
-  run() {
-    if (this.hasRun) return this;
-
+  runIteration() {
     this.fn.call(null, this);
     // need to run anything nested too
-    this.nested.forEach((d) => d.run());
+    const nestedPromises = this.nested.map((d) => d.run());
+    return Promise.all(nestedPromises);
+  }
 
-    this.hasRun = true;
+  run() {
+    let maxTries = this.ASYNC_TIMEOUT / 50;
+    let currentTries = 0;
 
-    return this;
+    if (this.asyncCount > 0) {
+      const runAndCheck = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            currentTries++;
+            this.runIteration().then(() => {
+              if (this.asyncCount + this.syncCount === this.assertions.length) {
+                resolve(this);
+              } else if (currentTries >= maxTries) {
+                throw new Error('ASYNC_TMEOUT test fail');
+              } else {
+                resolve(runAndCheck());
+              }
+            }).catch((e) => {
+              this.asyncError = e;
+              resolve(this);
+            });
+          }, 50);
+        });
+      };
+
+      return runAndCheck();
+    } else {
+      return this.runIteration().then(() => {
+        return this;
+      });
+    }
+  }
+
+  hasMatchingAssertion(name, args) {
+    return this.assertions.some((a) => {
+      return a.name === name && isEqual(a.args, args);
+    });
   }
 }
 
 const wrapAssertion = (name, assertionFn) => {
   Describe.prototype[name] = function(...args) {
+    // avoid running the same assertion multiple times
+    if (this.hasMatchingAssertion(name, args)) return;
+
     let passed = true;
     let error;
 
     try {
-      assertionFn.apply(null, args);
+      assertionFn(...args);
     } catch (e) {
       passed = false;
       error = e;
     }
 
-    this.assertions.push({ passed, error });
+    this.assertions.push({ name, args, passed, error });
   }
 }
 
@@ -89,6 +135,10 @@ wrapAssertion('assertEqual', (x, y) => {
 
 wrapAssertion('ok', (x) => {
   expect(x).to.be.ok;
+});
+
+wrapAssertion('deepEqual', (x, y) => {
+  expect(x).to.deep.equal(y);
 });
 
 const makeDescribe = (name, fn) => {

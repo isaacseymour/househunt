@@ -18,4 +18,16 @@ describe('testing foo', (t) => {
     t.ok(true);
     t.ok(false);
   });
+
+  t.describe('Another block', (t) => {
+    t.deepEqual({ x : 1 }, { y: 1 });
+  });
+
+  t.describe('Something async', (t) => {
+    t.async(1, 1);
+    t.ok(true);
+    setTimeout(() => {
+      t.ok(true);
+    }, 100);
+  });
 });

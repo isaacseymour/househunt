@@ -20,15 +20,14 @@ const renderAssertions = (result) => {
   result.assertions.forEach((assertion) => {
     const assertionMessage = document.createElement('li');
     assertionMessage.classList.add('assertion-message');
-
-    if (assertion.error && assertion.error.stack) {
-      const preStack = document.createElement('pre');
-      preStack.classList.add('assertion-stack');
-      const codeStack = document.createElement('code');
-      codeStack.textContent = assertion.error.stack;
-      preStack.appendChild(codeStack);
-      wrap.appendChild(preStack);
-    }
+    // if (assertion.error && assertion.error.stack) {
+    //   const preStack = document.createElement('pre');
+    //   preStack.classList.add('assertion-stack');
+    //   const codeStack = document.createElement('code');
+    //   codeStack.textContent = assertion.error.stack;
+    //   preStack.appendChild(codeStack);
+    //   wrap.appendChild(preStack);
+    // }
   });
   return wrap;
 }
@@ -50,6 +49,10 @@ const renderResult = (result) => {
       span.textContent = `Describe: ${result.name} failed!`;
     }
 
+    if (result.asyncError) {
+      span.textContent += ' (Async test timed out)';
+    }
+
     span.appendChild(renderAssertions(result));
 
     return span;
@@ -58,7 +61,6 @@ const renderResult = (result) => {
   div.appendChild(innerContent);
 
   if (result.nested.length > 0) {
-    console.log('doing nested', result.nested);
     div.appendChild(renderResults(result.nested));
   }
 
@@ -83,6 +85,9 @@ const renderResults = (results) => {
 const logResult = (result, indentLevel) => {
   const prefix = Array.from({ length: indentLevel }, () => '\t').join('');
   console.log(prefix, result.name, result.passedString());
+  if (result.asyncError) {
+    console.warn(prefix, result.asyncError.message, result.asyncError.stack);
+  }
   result.assertions.forEach((a) => {
     if (a.passed) return;
     console.warn(prefix + '\t', a.error.stack);
@@ -91,7 +96,9 @@ const logResult = (result, indentLevel) => {
 };
 
 Promise.all(promises).then(() => {
-  const results = processAssertions();
+  return processAssertions();
+}).then((results) => {
+  console.log('results', results);
   const message = document.createElement('p');
   message.textContent = 'All errors are logged to the console for clickable stack traces!';
   message.classList.add('top-message');

@@ -30,6 +30,7 @@ System.config({
     "immutable": "npm:immutable@3.7.5",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.0",
     "lodash": "npm:lodash@3.10.1",
+    "lodash.isequal": "npm:lodash.isequal@3.0.4",
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react-dom@0.14.0",
     "react-redux": "npm:react-redux@3.1.0",
@@ -381,6 +382,20 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "source-map": "npm:source-map@0.1.31"
+    },
+    "npm:lodash._baseisequal@3.0.7": {
+      "lodash.isarray": "npm:lodash.isarray@3.0.4",
+      "lodash.istypedarray": "npm:lodash.istypedarray@3.0.2",
+      "lodash.keys": "npm:lodash.keys@3.1.2"
+    },
+    "npm:lodash.isequal@3.0.4": {
+      "lodash._baseisequal": "npm:lodash._baseisequal@3.0.7",
+      "lodash._bindcallback": "npm:lodash._bindcallback@3.0.1"
+    },
+    "npm:lodash.keys@3.1.2": {
+      "lodash._getnative": "npm:lodash._getnative@3.9.1",
+      "lodash.isarguments": "npm:lodash.isarguments@3.0.4",
+      "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
     "npm:lodash@3.10.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
