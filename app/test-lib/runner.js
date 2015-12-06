@@ -9,10 +9,6 @@ export function runTestsOnFiles(files) {
     return processAssertions();
   }).then((results) => {
     console.log('results', results);
-    const message = document.createElement('p');
-    message.textContent = 'All errors are logged to the console for clickable stack traces!';
-    message.classList.add('top-message');
-    document.body.appendChild(message);
     document.body.appendChild(renderResults(results));
     logResults(results);
   }).catch((e) => {
