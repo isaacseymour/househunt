@@ -10,10 +10,7 @@ const describe = (name, fn) => {
 
 const processAssertions = () => {
   let resultPromises = describes.map((d) => d.run());
-  return Promise.all(resultPromises).then((results) => {
-    console.log('got results', results);
-    return results;
-  });
+  return Promise.all(resultPromises);
 }
 
 export {

@@ -1,16 +1,14 @@
-import test from 'tape';
-import { dom } from './helpers';
+import { describe } from '../test-lib/main';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import AddDestination from '../components/add-destination';
 
-test('AddDestination component', (t) => {
-  dom();
-  t.plan(2);
+describe('AddDestination component', (t) => {
   const callback = (postcode) => {
-    t.equal(postcode, 'WC1X 9QZ');
+    t.assertEqual(postcode, 'WC1X 9QZ');
   };
 
   const result = ReactTestUtils.renderIntoDocument(
@@ -25,5 +23,5 @@ test('AddDestination component', (t) => {
   const form = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'form');
   ReactTestUtils.Simulate.submit(ReactDOM.findDOMNode(form));
 
-  t.equal(textNode.value, '');
+  t.assertEqual(textNode.value, '');
 });

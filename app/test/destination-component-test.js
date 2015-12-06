@@ -1,5 +1,5 @@
-import test from 'tape';
-import { dom } from './helpers';
+import { describe } from '../test-lib/main';
+
 import { Map } from 'immutable';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,24 +11,18 @@ const destination = Map({
   postcode: 'WC1X 9QZ',
 });
 
-test('Destination component', (t) => {
-  dom();
-
+describe('Destination component', (t) => {
   const result = ReactTestUtils.renderIntoDocument(
     <Destination destination={destination} uuid="123" />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
   t.ok(ReactDOM.findDOMNode(element).textContent.indexOf('WC1X 9QZ') > -1);
-  t.end();
 });
 
-test('Deleting the destination', (t) => {
-  dom();
-  t.plan(1);
-
+describe('Deleting the destination', (t) => {
   const callback = (uuid) => {
-    t.equal(uuid, 'abc123');
+    t.assertEqual(uuid, 'abc123');
   };
 
   const result = ReactTestUtils.renderIntoDocument(

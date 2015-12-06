@@ -1,16 +1,17 @@
-import test from 'tape';
-import { dom } from './helpers';
+import { describe } from '../test-lib/main';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import AddHouse from '../components/add-house';
 
-test('AddHouse component', (t) => {
-  dom();
-  t.plan(2);
+describe('AddHouse component', (t) => {
   const callback = (url) => {
-    t.equal(url, 'www.rightmove.co.uk/property-to-rent/property-46665035.html');
+    t.assertEqual(
+      url,
+      'www.rightmove.co.uk/property-to-rent/property-46665035.html'
+    );
   };
 
   const result = ReactTestUtils.renderIntoDocument(
@@ -26,5 +27,5 @@ test('AddHouse component', (t) => {
   const formNode = ReactDOM.findDOMNode(form);
   ReactTestUtils.Simulate.submit(formNode);
 
-  t.equal(textNode.value, '');
+  t.assertEqual(textNode.value, '');
 });

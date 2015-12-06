@@ -1,10 +1,13 @@
 import { assertEqual, ok } from './assertions';
+import { Assertion } from './assertion';
 import isEqual from 'lodash.isequal';
 import { expect } from 'chai';
 
 let counter = 0;
 
 const makeId = () => counter++;
+
+const resetDom = () => document.body.innerHTML = '';
 
 class Describe {
   constructor(name, fn) {
@@ -13,8 +16,7 @@ class Describe {
     this.fn = fn;
     this.nested = [];
     this.assertions = [];
-    this.asyncCount = 0;
-    this.syncCount = 0;
+    this.expectedCount = 0;
     this.ASYNC_TIMEOUT = 2000;
   }
 
@@ -24,9 +26,8 @@ class Describe {
     return nested;
   }
 
-  async(num, syncNum) {
-    this.asyncCount = num;
-    this.syncCount = syncNum;
+  plan(num) {
+    this.expectedCount = num;
   }
 
   passed() {
@@ -65,42 +66,57 @@ class Describe {
 
   runIteration() {
     this.fn.call(null, this);
+    this.assertions.forEach((assertion) => {
+      assertion.run();
+    });
     // need to run anything nested too
     const nestedPromises = this.nested.map((d) => d.run());
     return Promise.all(nestedPromises);
   }
 
   run() {
-    let maxTries = this.ASYNC_TIMEOUT / 50;
+    let maxTries = this.ASYNC_TIMEOUT / 10;
     let currentTries = 0;
 
-    if (this.asyncCount > 0) {
-      const runAndCheck = () => {
+    resetDom();
+
+    return this.runIteration().then(() => {
+      if (this.expectedCount === 0) {
+        // tests not async, so no need to worry about anything
+        return this;
+      }
+
+      if (this.expectedCount === this.assertions.length) {
+        // tests async but we have as many as we expected
+        return this;
+      }
+
+      // we're awaiting some extra assertions
+      const waitForAsync = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             currentTries++;
-            this.runIteration().then(() => {
-              if (this.asyncCount + this.syncCount === this.assertions.length) {
-                resolve(this);
-              } else if (currentTries >= maxTries) {
-                throw new Error('ASYNC_TMEOUT test fail');
-              } else {
-                resolve(runAndCheck());
-              }
-            }).catch((e) => {
-              this.asyncError = e;
-              resolve(this);
-            });
-          }, 50);
+             if (currentTries >= maxTries) {
+              throw new Error(
+                `Async Timeout. Expected ${this.expectedCount} assertions but got ${this.assertions.length}. Update your t.plan call.`
+              );
+             } else {
+               if (this.expectedCount === this.assertions.length) {
+                 // new ones got added, make sure we run them
+                 this.assertions.forEach((a) => a.run());
+                 resolve(this);
+                 return;
+               } else {
+                 // let's check again in 10 milliseconds
+                 return resolve(waitForAsync());
+               }
+             }
+          }, 10);
         });
-      };
+      }
 
-      return runAndCheck();
-    } else {
-      return this.runIteration().then(() => {
-        return this;
-      });
-    }
+      return waitForAsync();
+    });
   }
 
   hasMatchingAssertion(name, args) {
@@ -112,20 +128,10 @@ class Describe {
 
 const wrapAssertion = (name, assertionFn) => {
   Describe.prototype[name] = function(...args) {
-    // avoid running the same assertion multiple times
-    if (this.hasMatchingAssertion(name, args)) return;
 
-    let passed = true;
-    let error;
+    const assertion = new Assertion({ name, args, fn: assertionFn });
 
-    try {
-      assertionFn(...args);
-    } catch (e) {
-      passed = false;
-      error = e;
-    }
-
-    this.assertions.push({ name, args, passed, error });
+    this.assertions.push(assertion);
   }
 }
 

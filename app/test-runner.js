@@ -4,7 +4,11 @@ import {
 } from './test-lib/main';
 
 const testFiles = [
-  'test/foo-test.js'
+  'test/foo-test.js',
+  // 'test/add-destination-component-test.js',
+  // 'test/add-house-component-test.js',
+  // 'test/destination-component-test.js',
+  // 'test/directions-test.js'
 ];
 
 const promises = testFiles.map((f) => System.import(f));
@@ -106,5 +110,5 @@ Promise.all(promises).then(() => {
   document.body.appendChild(renderResults(results));
   results.forEach((r) => logResult(r, 0));
 }).catch((e) => {
-  console.log('Eror running tests', e);
+  console.error('Eror running tests', e);
 });

@@ -24,10 +24,12 @@ describe('testing foo', (t) => {
   });
 
   t.describe('Something async', (t) => {
-    t.async(1, 1);
+    t.plan(4);
     t.ok(true);
     setTimeout(() => {
       t.ok(true);
+      t.ok(2 == 2);
+      t.assertEqual(2, 3);
     }, 100);
   });
 });
