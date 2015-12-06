@@ -22,7 +22,7 @@ describe('Destination component', (t) => {
 
 describe('Deleting the destination', (t) => {
   const callback = (uuid) => {
-    t.assertEqual(uuid, 'abc123');
+    t.equal(uuid, 'abc123');
   };
 
   const result = ReactTestUtils.renderIntoDocument(

@@ -66,18 +66,12 @@ class Describe {
 
   runIteration() {
     this.fn.call(null, this);
-    this.assertions.forEach((assertion) => {
-      assertion.run();
-    });
     // need to run anything nested too
     const nestedPromises = this.nested.map((d) => d.run());
     return Promise.all(nestedPromises);
   }
 
   run() {
-    let maxTries = this.ASYNC_TIMEOUT / 10;
-    let currentTries = 0;
-
     resetDom();
 
     return this.runIteration().then(() => {
@@ -86,36 +80,34 @@ class Describe {
         return this;
       }
 
-      if (this.expectedCount === this.assertions.length) {
-        // tests async but we have as many as we expected
-        return this;
+      const timeoutError = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const e = new Error(`Async Timeout. Expected ${this.expectedCount} assertions but got ${this.assertions.length}. Update your t.plan call.`);
+            reject(e);
+          }, this.ASYNC_TIMEOUT);
+        });
       }
 
-      // we're awaiting some extra assertions
       const waitForAsync = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            currentTries++;
-             if (currentTries >= maxTries) {
-              throw new Error(
-                `Async Timeout. Expected ${this.expectedCount} assertions but got ${this.assertions.length}. Update your t.plan call.`
-              );
-             } else {
-               if (this.expectedCount === this.assertions.length) {
-                 // new ones got added, make sure we run them
-                 this.assertions.forEach((a) => a.run());
-                 resolve(this);
-                 return;
-               } else {
-                 // let's check again in 10 milliseconds
-                 return resolve(waitForAsync());
-               }
-             }
+            if (this.expectedCount === this.assertions.length) {
+              resolve(this);
+            } else {
+              resolve(waitForAsync());
+            }
           }, 10);
         });
       }
 
-      return waitForAsync();
+      return Promise.race([
+        timeoutError(),
+        waitForAsync()
+      ]).catch((e) => {
+        this.asyncError = e;
+        return this;
+      })
     });
   }
 
@@ -130,12 +122,13 @@ const wrapAssertion = (name, assertionFn) => {
   Describe.prototype[name] = function(...args) {
 
     const assertion = new Assertion({ name, args, fn: assertionFn });
+    assertion.run();
 
     this.assertions.push(assertion);
   }
 }
 
-wrapAssertion('assertEqual', (x, y) => {
+wrapAssertion('equal', (x, y) => {
   expect(x).to.equal(y);
 });
 

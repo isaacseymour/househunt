@@ -1,4 +1,4 @@
-import test from 'tape';
+import { describe } from '../test-lib/main';
 import uuid from 'uuid';
 import { Map } from 'immutable';
 
@@ -11,26 +11,24 @@ import { requestHouse, DELETE_HOUSE, updateHouseData } from '../actions/house';
 
 import reducer from '../reducers';
 
-test('adding destination', (t) => {
+describe('adding destination', (t) => {
   const initState = { destinations: Map() };
   const newState = reducer(initState, requestDestination('id', 'WC1X 9QZ'));
   t.equal(newState.destinations.size, 1);
   t.deepEqual(newState.destinations.first().toJS(), Map({
     postcode: 'WC1X 9QZ',
   }).toJS());
-  t.end();
 });
 
-test('removing a destination', (t) => {
+describe('removing a destination', (t) => {
   const initState = {
     destinations: Map({ 'abc': Map() }),
   };
   const newState = reducer(initState, { type: DELETE_DESTINATION, id: 'abc' });
   t.ok(newState.destinations.isEmpty());
-  t.end();
 });
 
-test('adding house', (t) => {
+describe('adding house', (t) => {
   const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
   const initState = { houses: Map() };
   const newState = reducer(initState, requestHouse('id', rightmoveUrl));
@@ -38,19 +36,17 @@ test('adding house', (t) => {
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: rightmoveUrl,
   }).toJS());
-  t.end();
 });
 
-test('removing a house', (t) => {
+describe('removing a house', (t) => {
   const initState = {
     houses: Map({ 'abc': Map() }),
   };
   const newState = reducer(initState, { type: DELETE_HOUSE, id: 'abc' });
   t.ok(newState.houses.isEmpty());
-  t.end();
 });
 
-test('updating a house', (t) => {
+describe('updating a house', (t) => {
   const id = uuid.v1();
   const initState = {
     houses: Map({
@@ -69,11 +65,9 @@ test('updating a house', (t) => {
     lng: undefined,
     imageUrl: 'https://media.com/thing.png',
   }).toJS());
-  t.end();
 });
 
-test('updating a destination', (t) => {
-  t.plan(1);
+describe('updating a destination', (t) => {
   const id = uuid.v1();
   const initState = {
     destinations: Map({

@@ -1,8 +1,8 @@
-import test from 'tape';
+import { describe } from '../test-lib/main';
 import geocode from '../services/geocode';
 import { LatLng, mockGeocoder } from '../maps';
 
-test('when the Google API responds normally', (t) => {
+describe('when the Google API responds normally', (t) => {
   t.plan(3);
 
   const address = 'Some place';
@@ -17,7 +17,7 @@ test('when the Google API responds normally', (t) => {
     .catch(t.fail);
 });
 
-test('when the Google API errors', (t) => {
+describe('when the Google API errors', (t) => {
   t.plan(2);
 
   const address = 'Some bad place';

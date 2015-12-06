@@ -4,11 +4,15 @@ import {
 } from './test-lib/main';
 
 const testFiles = [
-  'test/foo-test.js',
-  // 'test/add-destination-component-test.js',
-  // 'test/add-house-component-test.js',
-  // 'test/destination-component-test.js',
-  // 'test/directions-test.js'
+  'test/add-destination-component-test.js',
+  'test/add-house-component-test.js',
+  'test/destination-component-test.js',
+  'test/directions-test.js',
+  'test/geocode-test.js',
+  'test/house-component-test.js',
+  'test/list-destinations-component-test.js',
+  'test/list-houses-component-test.js',
+  'test/reducers-test.js'
 ];
 
 const promises = testFiles.map((f) => System.import(f));

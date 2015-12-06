@@ -1,5 +1,4 @@
-import test from 'tape';
-import { dom } from './helpers';
+import { describe } from '../test-lib/main';
 import { Map } from 'immutable';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,10 +8,7 @@ import House from '../components/house';
 
 const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
 
-test('House component while fetching the house', (t) => {
-  t.plan(1);
-  dom();
-
+describe('House component while fetching the house', (t) => {
   const house = Map({ url: rightmoveUrl });
 
   const result = ReactTestUtils.renderIntoDocument(
@@ -23,10 +19,7 @@ test('House component while fetching the house', (t) => {
   t.ok(ReactDOM.findDOMNode(element).textContent.indexOf('Fetching property details...') > -1);
 });
 
-test('House component with the house loaded', (t) => {
-  t.plan(1);
-  dom();
-
+describe('House component with the house loaded', (t) => {
   const house = Map({
     url: rightmoveUrl,
     address: 'Goswell Road, EC1V',
@@ -41,10 +34,7 @@ test('House component with the house loaded', (t) => {
   t.ok(ReactDOM.findDOMNode(element).textContent.indexOf(house.get('address')) > -1);
 });
 
-test('Deleting the house', (t) => {
-  dom();
-  t.plan(1);
-
+describe('Deleting the house', (t) => {
   const house = Map({ url: rightmoveUrl, address: 'Goswell Road, EC1V' });
   const callback = (id) => t.equal(id, 'abc123');
 

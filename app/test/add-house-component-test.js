@@ -8,7 +8,7 @@ import AddHouse from '../components/add-house';
 
 describe('AddHouse component', (t) => {
   const callback = (url) => {
-    t.assertEqual(
+    t.equal(
       url,
       'www.rightmove.co.uk/property-to-rent/property-46665035.html'
     );
@@ -27,5 +27,5 @@ describe('AddHouse component', (t) => {
   const formNode = ReactDOM.findDOMNode(form);
   ReactTestUtils.Simulate.submit(formNode);
 
-  t.assertEqual(textNode.value, '');
+  t.equal(textNode.value, '');
 });

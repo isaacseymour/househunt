@@ -5,13 +5,13 @@ import {
 const foo = (x, y) => x + y;
 
 describe('testing foo', (t) => {
-  t.assertEqual(1, 1);
+  t.equal(1, 1);
   t.describe('Adding 2 + 2', (t) => {
-    t.assertEqual(foo(2, 2), 4);
+    t.equal(foo(2, 2), 4);
   });
 
   t.describe('Adding 1 + 1', (t) => {
-    t.assertEqual(foo(1, 1), 3);
+    t.equal(foo(1, 1), 3);
   });
 
   t.describe('Things are fine', (t) => {
@@ -29,7 +29,7 @@ describe('testing foo', (t) => {
     setTimeout(() => {
       t.ok(true);
       t.ok(2 == 2);
-      t.assertEqual(2, 3);
+      t.equal(2, 3);
     }, 100);
   });
 });
