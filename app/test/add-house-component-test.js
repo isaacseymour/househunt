@@ -1,4 +1,4 @@
-import { describe } from '../test-lib/main';
+import { describe } from 'jspm-test/describe';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

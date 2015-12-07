@@ -1,8 +1,8 @@
+import { describe } from 'jspm-test/describe';
 import { Map } from 'immutable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import { describe } from '../test-lib/main';
 
 import ListHouses from '../components/list-houses';
 

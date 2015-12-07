@@ -29,6 +29,7 @@ System.config({
     "fetch": "npm:whatwg-fetch@0.10.1",
     "immutable": "npm:immutable@3.7.5",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.0",
+    "jspm-test": "github:jackfranklin/jspm-test@0.1.0",
     "lodash": "npm:lodash@3.10.1",
     "lodash.isequal": "npm:lodash.isequal@3.0.4",
     "react": "npm:react@0.14.0",
@@ -40,11 +41,14 @@ System.config({
     "systemjs-googlemaps": "github:HeinrichFilter/systemjs-plugin-googlemaps@master",
     "tape": "npm:tape@4.2.1",
     "uuid": "npm:uuid@2.0.1",
+    "github:jackfranklin/jspm-test@0.1.0": {
+      "chai": "npm:chai@3.4.1"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.5.2"
+      "buffer": "npm:buffer@3.5.4"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -180,12 +184,12 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:buffer@3.5.2": {
+    "npm:buffer@3.5.4": {
       "base64-js": "npm:base64-js@0.0.8",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "ieee754": "npm:ieee754@1.1.6",
-      "is-array": "npm:is-array@1.0.1",
+      "isarray": "npm:isarray@0.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:chai@3.4.1": {

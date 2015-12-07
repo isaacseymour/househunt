@@ -40,6 +40,7 @@
       "fetch": "npm:whatwg-fetch@^0.10.1",
       "immutable": "npm:immutable@^3.7.4",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.2.0",
+      "jspm-test": "github:jackfranklin/jspm-test@0.1.0",
       "lodash": "npm:lodash@^3.10.1",
       "lodash.isequal": "npm:lodash.isequal@^3.0.4",
       "react": "npm:react@0.14.2",

@@ -1,6 +1,6 @@
 import {
   runTestsOnFiles
-} from './test-lib/runner';
+} from 'jspm-test/runner';
 
 const testFiles = [
   'test/add-destination-component-test.js',

@@ -1,4 +1,4 @@
-import { describe } from '../test-lib/main';
+import { describe } from 'jspm-test/describe';
 import geocode from '../services/geocode';
 import { LatLng, mockGeocoder } from '../maps';
 
