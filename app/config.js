@@ -29,7 +29,7 @@ System.config({
     "fetch": "npm:whatwg-fetch@0.10.1",
     "immutable": "npm:immutable@3.7.5",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.0",
-    "jspm-test": "github:jackfranklin/jspm-test@0.1.0",
+    "jspm-test": "github:jackfranklin/jspm-test@0.1.1",
     "lodash": "npm:lodash@3.10.1",
     "lodash.isequal": "npm:lodash.isequal@3.0.4",
     "react": "npm:react@0.14.0",
@@ -41,8 +41,9 @@ System.config({
     "systemjs-googlemaps": "github:HeinrichFilter/systemjs-plugin-googlemaps@master",
     "tape": "npm:tape@4.2.1",
     "uuid": "npm:uuid@2.0.1",
-    "github:jackfranklin/jspm-test@0.1.0": {
-      "chai": "npm:chai@3.4.1"
+    "github:jackfranklin/jspm-test@0.1.1": {
+      "chai": "npm:chai@3.4.1",
+      "css": "github:systemjs/plugin-css@0.1.20"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
