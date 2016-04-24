@@ -37,6 +37,7 @@ test('adding house', (t) => {
   t.equal(newState.houses.size, 1);
   t.deepEqual(newState.houses.first().toJS(), Map({
     url: rightmoveUrl,
+    commutes: Map(),
   }).toJS());
   t.end();
 });

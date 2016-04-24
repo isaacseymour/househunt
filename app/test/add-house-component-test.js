@@ -14,7 +14,7 @@ test('AddHouse component', (t) => {
   };
 
   const result = ReactTestUtils.renderIntoDocument(
-    <AddHouse addHouse={callback}/>
+    <AddHouse addHouse={callback} />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'input');

@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import geocode from '../services/geocode';
-import { updateCommutes } from './commute';
+import { requestCommutesForDestination } from './commute';
 
 export const ADD_DESTINATION = 'ADD_DESTINATION';
 export const requestDestination = (id, postcode) => ({
@@ -16,7 +16,7 @@ export const addDestination = (postcode) => (dispatch) => {
 
   geocode(postcode)
     .then((data) => dispatch(updateDestinationData(id, data.lat(), data.lng())))
-    .then(() => dispatch(updateCommutes));
+    .then(() => dispatch(requestCommutesForDestination(id)));
 };
 
 export const UPDATE_DESTINATION_DATA = 'UPDATE_DESTINATION_DATA';
@@ -28,11 +28,4 @@ export const updateDestinationData = (id, lat, lng) => ({
 });
 
 export const DELETE_DESTINATION = 'DELETE_DESTINATION';
-export const deleteDestination = (id) => (dispatch) => {
-  dispatch({
-    type: DELETE_DESTINATION,
-    id,
-  });
-
-  dispatch(updateCommutes);
-};
+export const deleteDestination = (id) => ({ type: DELETE_DESTINATION, id });

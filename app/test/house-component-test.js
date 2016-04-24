@@ -13,10 +13,10 @@ test('House component while fetching the house', (t) => {
   t.plan(1);
   dom();
 
-  const house = Map({ url: rightmoveUrl });
+  const house = Map({ url: rightmoveUrl, commutes: Map() });
 
   const result = ReactTestUtils.renderIntoDocument(
-    <House house={house} uuid="123" destinations={Map()} commutes={Map()} />
+    <House house={house} uuid="123" destinations={Map()} />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
@@ -31,10 +31,11 @@ test('House component with the house loaded', (t) => {
     url: rightmoveUrl,
     address: 'Goswell Road, EC1V',
     imageUrl: 'http://rightmove.co.uk/some/image/url.jpg',
+    commutes: Map(),
   });
 
   const result = ReactTestUtils.renderIntoDocument(
-    <House house={house} uuid="123" destinations={Map()} commutes={Map()} />
+    <House house={house} uuid="123" destinations={Map()} />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
@@ -45,13 +46,17 @@ test('Deleting the house', (t) => {
   dom();
   t.plan(1);
 
-  const house = Map({ url: rightmoveUrl, address: 'Goswell Road, EC1V' });
+  const house = Map({
+    url: rightmoveUrl,
+    address: 'Goswell Road, EC1V',
+    commutes: Map(),
+  });
   const callback = (id) => t.equal(id, 'abc123');
 
   const result = ReactTestUtils.renderIntoDocument(
     <House
       house={house} uuid='abc123'
-      destinations={Map()} commutes={Map()}
+      destinations={Map()}
       deleteHouse={callback}
     />
   );

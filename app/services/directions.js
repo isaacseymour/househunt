@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import zipObject from 'lodash/array/zipObject';
 import { TravelMode, LatLng, DirectionsStatus, DirectionsService } from '../maps';
 
 const travelModes = Object.keys(TravelMode);
@@ -11,7 +11,7 @@ export default function directions({ lat: fromLat, lng: fromLng }, { lat: toLat,
 
   return Promise
     .all(travelModes.map((mode) => directionsForMode(from, to, mode)))
-    .then(_.zipObject);
+    .then(zipObject);
 }
 
 function directionsForMode(from, to, mode) {
