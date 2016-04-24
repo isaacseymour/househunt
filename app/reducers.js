@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 
-import commuteReducer from './reducers/commute';
-import destinationReducer from './reducers/destination';
-import houseReducer from './reducers/house';
+import destinations from './reducers/destination';
+import houses from './reducers/house';
 
 // State looks like:
 // {
@@ -19,21 +18,17 @@ import houseReducer from './reducers/house';
 //       url,
 //       postcode,
 //       imageUrl,
+//       commutes: {
+//         ${destination-uuid}: {
+//           WALKING,
+//           CYCLING,
+//           TRANSIT,
+//           DRIVING,
+//         },
+//         ...
+//       }
 //     }
-//   },
-//   commutes: {
-//     `${house-uuid}.${destination-uuid}`:{
-//       WALKING,
-//       CYCLING,
-//       TRANSIT,
-//       DRIVING,
-//     },
-//     ...
 //   },
 // }
 
-export default combineReducers({
-  commutes: commuteReducer,
-  destinations: destinationReducer,
-  houses: houseReducer,
-});
+export default combineReducers({ destinations, houses });

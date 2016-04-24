@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import fetch from 'isomorphic-fetch';
 import geocode from '../services/geocode';
-import { updateCommutes } from './commute';
+import { requestCommutesForHouse } from './commute';
 
 export const addHouse = (url) => (dispatch) => {
   const id = uuid.v1();
@@ -28,22 +28,20 @@ export const addHouse = (url) => (dispatch) => {
     .then((location) => ({ lat: location.lat(), lng: location.lng() }))
     .then((location) => updateHouseData(id, location))
     .then(dispatch)
+    .then(() => requestCommutesForHouse(id))
+    .then(dispatch)
     .catch((error) => {
       console.warn('add house error', error);
       // TODO: tell the user what's wrong somehow
       dispatch(deleteHouse(id));
-    })
-    .then(() => dispatch(updateCommutes));
+    });
 };
 
 export const REQUEST_HOUSE = 'REQUEST_HOUSE';
 export const requestHouse = (id, url) => ({ type: REQUEST_HOUSE, id, url });
 
 export const DELETE_HOUSE = 'DELETE_HOUSE';
-export const deleteHouse = (id) => (dispatch) => {
-  dispatch({ type: DELETE_HOUSE, id });
-  dispatch(updateCommutes);
-};
+export const deleteHouse = (id) => ({ type: DELETE_HOUSE, id });
 
 export const UPDATE_HOUSE_DATA = 'UPDATE_HOUSE_DATA';
 export const updateHouseData = (id, data) => {

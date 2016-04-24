@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteDestination } from '../components/destination';
+import { deleteDestination } from '../actions/destination';
 
 export class Destination extends React.Component {
   onDeleteClick(event) {

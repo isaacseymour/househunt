@@ -11,11 +11,11 @@ test('ListHouses component', (t) => {
     abc123: Map({ url: 'www.rightmove.co.uk/property-to-rent/property-46665035.html' }),
   });
   const result = shallow(
-    <ListHouses houses={houses} commutes={Map()} />
+    <ListHouses houses={houses} />
   );
 
   t.equal(result.find(House).length, 1);
   const house = result.find(House);
-  t.deepEqual(house.props(), { house: houses.get("abc123"), uuid: "abc123", commutes: Map() });
+  t.deepEqual(house.props(), { house: houses.get("abc123"), uuid: "abc123" });
   t.end();
 });

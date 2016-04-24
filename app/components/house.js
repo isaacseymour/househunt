@@ -1,7 +1,23 @@
 import React from 'react';
+import { Map } from 'immutable';
 
 import { connect } from 'react-redux';
 import { deleteHouse } from '../actions/house';
+
+const MAX_WALK = 25 * 60;
+
+function secondsToMinutes(seconds) {
+  return Math.round(seconds / 60);
+}
+
+function showCommute({ WALKING, BICYCLING, TRANSIT }) {
+  if(WALKING < MAX_WALK) {
+    return `${secondsToMinutes(WALKING)} mins 🚶`;
+  } else {
+    return `${secondsToMinutes(TRANSIT)} mins 🚌 ` +
+      `(or ${secondsToMinutes(WALKING)}m 🚶, ${secondsToMinutes(BICYCLING)}m 🚲)`;
+  }
+}
 
 export class House extends React.Component {
   onDeleteClick(event) {
@@ -9,18 +25,18 @@ export class House extends React.Component {
     this.props.deleteHouse(this.props.uuid);
   }
 
-  renderCommute(commute, id) {
-    const destinationId = id.split('.')[1];
+  renderCommutes() {
+    return this.props.house.get("commutes", new Map())
+      .map(this.renderCommute.bind(this))
+      .valueSeq();
+  }
+
+  renderCommute(commute, destinationId) {
     const destination = this.props.destinations.get(destinationId);
 
-    const formatTime = (seconds) => `${Math.round(seconds / 60)} mins`;
-
     return (
-      <li key={id}>
-        To {destination.get("postcode")}:<br />
-        🚶: {formatTime(commute.get("WALKING"))}<br />
-        🚲: {formatTime(commute.get("BICYCLING"))}<br />
-        🚌: {formatTime(commute.get("TRANSIT"))}<br />
+      <li key={destinationId}>
+        {showCommute(commute.toObject())} to {destination.get("postcode")}
       </li>
     );
   }
@@ -34,7 +50,7 @@ export class House extends React.Component {
              onClick={(event) => this.onDeleteClick(event)}
              className="secondary-content"><i className="material-icons">delete</i></a>
            <ul>
-             {this.props.commutes.map((commute, id) => this.renderCommute(commute, id)).valueSeq()}
+             { this.renderCommutes() }
             </ul>
         </div>
       );

@@ -1,5 +1,5 @@
 import test from 'tape';
-import _ from 'lodash';
+import mapValues from 'lodash/object/mapValues';
 import directions from '../services/directions';
 import { mockDirections } from '../maps';
 
@@ -40,7 +40,7 @@ test('when no directions are available', (t) => {
 
   directions(from, to)
     .then((results) => {
-      t.deepEqual(results, _.mapValues(responses, (value) => `Error: ${value}`));
+      t.deepEqual(results, mapValues(responses, (value) => `Error: ${value}`));
     })
     .catch(t.fail);
 });
