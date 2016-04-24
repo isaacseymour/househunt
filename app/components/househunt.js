@@ -55,6 +55,8 @@ export default class Househunt extends React.Component {
             <ListHouses
               deleteHouseCallback={(id) => this.deleteHouseCallback(id)}
               houses={this.props.houses}
+              commutes={this.props.commutes}
+              destinations={this.props.destinations}
             />
           </div>
         </div>
