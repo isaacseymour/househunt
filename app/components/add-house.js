@@ -40,6 +40,6 @@ export class AddHouse extends React.Component {
 }
 
 export default connect(
-  undefined,
+  null,
   { addHouse }
 )(AddHouse);
