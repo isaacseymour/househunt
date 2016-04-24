@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addHouse } from '../actions/house';
 
-export default class AddHouse extends React.Component {
+export class AddHouse extends React.Component {
   constructor(props) {
     super(props);
     this.state = { urlInput: '' };
@@ -12,7 +14,7 @@ export default class AddHouse extends React.Component {
 
   submit(event) {
     event.preventDefault();
-    this.props.addHouseCallback(this.state.urlInput);
+    this.props.addHouse(this.state.urlInput);
     this.setState({ urlInput: '' });
   }
 
@@ -36,3 +38,8 @@ export default class AddHouse extends React.Component {
     );
   }
 }
+
+export default connect(
+  undefined,
+  { addHouse }
+)(AddHouse);

@@ -1,45 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AddDestination from './add-destination';
 import ListDestinations from './list-destinations';
 import AddHouse from './add-house';
 import ListHouses from './list-houses';
 
-import { addDestination, deleteDestination } from '../actions/destination';
-import { addHouse, deleteHouse } from '../actions/house';
-
-export default class Househunt extends React.Component {
-  addDestinationCallback(postcode) {
-    this.props.dispatch(addDestination(postcode));
-  }
-
-  deleteDestinationCallback(id) {
-    this.props.dispatch(deleteDestination(id));
-  }
-
-  addHouseCallback(url) {
-    this.props.dispatch(addHouse(url));
-  }
-
-  deleteHouseCallback(id) {
-    this.props.dispatch(deleteHouse(id));
-  }
-
+export default class Househunt extends Component {
   render() {
     return (
       <div className="container">
         <div className="row">
           <div className="col s4">
             <h3>Add a destination</h3>
-            <AddDestination
-              addDestinationCallback={(postcode) => this.addDestinationCallback(postcode)}
-            />
+            <AddDestination />
           </div>
 
           <div className="col s6 offset-s2">
-            <ListDestinations
-              deleteDestinationCallback={(id) => this.deleteDestinationCallback(id)}
-              destinations={this.props.destinations}
-            />
+            <ListDestinations />
           </div>
         </div>
 
@@ -48,16 +24,11 @@ export default class Househunt extends React.Component {
         <div className="row">
           <div className="col s4">
             <h3>Add a House</h3>
-            <AddHouse addHouseCallback={(url) => this.addHouseCallback(url)} />
+            <AddHouse />
           </div>
 
           <div className="col s6 offset-s2">
-            <ListHouses
-              deleteHouseCallback={(id) => this.deleteHouseCallback(id)}
-              houses={this.props.houses}
-              commutes={this.props.commutes}
-              destinations={this.props.destinations}
-            />
+            <ListHouses />
           </div>
         </div>
       </div>

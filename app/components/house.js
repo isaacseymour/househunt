@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default class House extends React.Component {
+import { connect } from 'react-redux';
+import { deleteHouse } from '../actions/house';
+
+export class House extends React.Component {
   onDeleteClick(event) {
     event.preventDefault();
-    this.props.deleteHouseCallback(this.props.uuid);
+    this.props.deleteHouse(this.props.uuid);
   }
 
   renderCommute(commute, id) {
@@ -42,3 +45,8 @@ export default class House extends React.Component {
     }
   }
 }
+
+export default connect(
+  ({ destinations }) => ({ destinations }),
+  { deleteHouse }
+)(House);

@@ -5,11 +5,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import Destination from '../components/destination';
+import { Destination } from '../components/destination';
 
-const destination = Map({
-  postcode: 'WC1X 9QZ',
-});
+const destination = Map({ postcode: 'WC1X 9QZ' });
 
 test('Destination component', (t) => {
   dom();
@@ -34,7 +32,7 @@ test('Deleting the destination', (t) => {
   const result = ReactTestUtils.renderIntoDocument(
     <Destination
       destination={destination} uuid='abc123'
-      deleteDestinationCallback={callback}
+      deleteDestination={callback}
     />
   );
 

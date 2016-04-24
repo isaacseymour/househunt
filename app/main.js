@@ -4,18 +4,18 @@ import Househunt from './components/househunt';
 
 import reducer from './reducers';
 
-import { createStore, applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import persistState from 'redux-localstorage';
 
-const store = applyMiddleware(thunkMiddleware)(createStore)(reducer);
+const createPersistentStore = compose(persistState())(createStore);
+const store = applyMiddleware(thunkMiddleware)(createPersistentStore)(reducer);
 store.subscribe(() => console.log('store change', store.getState()));
-
-const ConnectedHousehunt = connect((state) => state)(Househunt);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedHousehunt />
+    <Househunt />
   </Provider>,
   document.getElementById('app')
 );
