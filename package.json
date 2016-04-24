@@ -6,7 +6,6 @@
   "scripts": {
     "test": "babel-tape-runner **/test/*-test.js | faucet",
     "lint": "eslint .",
-    "ci": "npm test && npm run lint",
     "start": "babel-node server.js"
   },
   "author": "",
