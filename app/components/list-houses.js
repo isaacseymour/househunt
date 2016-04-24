@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import House from './house';
 
-export default class ListHouses extends React.Component {
+export class ListHouses extends React.Component {
   commutesForHouse(houseId) {
     return this.props.commutes.filter((_, key) => key.split('.')[0] === houseId);
   }
@@ -10,13 +11,7 @@ export default class ListHouses extends React.Component {
     return this.props.houses.map((house, uuid) => {
       return (
         <li key={uuid} className="collection-item">
-          <House
-            deleteHouseCallback={this.props.deleteHouseCallback}
-            house={house}
-            uuid={uuid}
-            commutes={this.commutesForHouse(uuid)}
-            destinations={this.props.destinations}
-          />
+          <House house={house} uuid={uuid} commutes={this.commutesForHouse(uuid)} />
         </li>
       );
     }).toList();
@@ -33,3 +28,7 @@ export default class ListHouses extends React.Component {
     );
   }
 }
+
+export default connect(
+  ({ commutes, houses }) => ({ commutes, houses })
+)(ListHouses);

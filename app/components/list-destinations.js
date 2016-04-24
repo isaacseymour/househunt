@@ -1,16 +1,13 @@
 import React from 'react';
 import Destination from './destination';
+import { connect } from 'react-redux';
 
-export default class ListDestinations extends React.Component {
+export class ListDestinations extends React.Component {
   renderDestinations() {
     return this.props.destinations.map((destination, uuid) => {
       return (
         <li key={uuid} className="collection-item">
-          <Destination
-            deleteDestinationCallback={this.props.deleteDestinationCallback}
-            destination={destination}
-            uuid={uuid}
-          />
+          <Destination destination={destination} uuid={uuid} />
         </li>
       );
     }).toList();
@@ -27,3 +24,5 @@ export default class ListDestinations extends React.Component {
     );
   }
 }
+
+export default connect(({ destinations }) => ({ destinations }))(ListDestinations);

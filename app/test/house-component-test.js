@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import House from '../components/house';
+import { House } from '../components/house';
 
 const rightmoveUrl = 'www.rightmove.co.uk/property-to-rent/property-46665035.html';
 
@@ -16,7 +16,7 @@ test('House component while fetching the house', (t) => {
   const house = Map({ url: rightmoveUrl });
 
   const result = ReactTestUtils.renderIntoDocument(
-    <House house={house} uuid="123" />
+    <House house={house} uuid="123" destinations={Map()} commutes={Map()} />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
@@ -34,7 +34,7 @@ test('House component with the house loaded', (t) => {
   });
 
   const result = ReactTestUtils.renderIntoDocument(
-    <House house={house} uuid="123" />
+    <House house={house} uuid="123" destinations={Map()} commutes={Map()} />
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'div');
@@ -51,10 +51,11 @@ test('Deleting the house', (t) => {
   const result = ReactTestUtils.renderIntoDocument(
     <House
       house={house} uuid='abc123'
-      deleteHouseCallback={callback}
+      destinations={Map()} commutes={Map()}
+      deleteHouse={callback}
     />
   );
 
-  const link = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'a');
+  const link = ReactTestUtils.scryRenderedDOMComponentsWithTag(result, 'a')[1];
   ReactTestUtils.Simulate.click(link);
 });

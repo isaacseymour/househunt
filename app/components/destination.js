@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteDestination } from '../components/destination';
 
-export default class Destination extends React.Component {
+export class Destination extends React.Component {
   onDeleteClick(event) {
     event.preventDefault();
-    this.props.deleteDestinationCallback(this.props.uuid);
+    this.props.deleteDestination(this.props.uuid);
   }
 
   renderLatLng() {
@@ -27,3 +29,5 @@ export default class Destination extends React.Component {
     );
   }
 }
+
+export default connect(null, { deleteDestination })(Destination);

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
-import AddDestination from '../components/add-destination';
+import { AddDestination } from '../components/add-destination';
 
 test('AddDestination component', (t) => {
   dom();
@@ -14,7 +14,7 @@ test('AddDestination component', (t) => {
   };
 
   const result = ReactTestUtils.renderIntoDocument(
-    <AddDestination addDestinationCallback={callback}/>
+    <AddDestination addDestination={callback}/>
   );
 
   const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'input');

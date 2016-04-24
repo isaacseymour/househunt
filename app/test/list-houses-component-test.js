@@ -1,25 +1,21 @@
 import test from 'tape';
-import { dom } from './helpers';
 import { Map } from 'immutable';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react/lib/ReactTestUtils';
+import { shallow } from 'enzyme';
 
-import ListHouses from '../components/list-houses';
+import { ListHouses } from '../components/list-houses';
+import House from '../components/house';
 
 test('ListHouses component', (t) => {
-  dom();
-
   const houses = Map({
     abc123: Map({ url: 'www.rightmove.co.uk/property-to-rent/property-46665035.html' }),
   });
-
-  const result = ReactTestUtils.renderIntoDocument(
-    <ListHouses houses={houses} />
+  const result = shallow(
+    <ListHouses houses={houses} commutes={Map()} />
   );
 
-  const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'li');
-  const textNode = ReactDOM.findDOMNode(element);
-  t.ok(textNode.textContent.indexOf('Fetching property details...') > -1);
+  t.equal(result.find(House).length, 1);
+  const house = result.find(House);
+  t.deepEqual(house.props(), { house: houses.get("abc123"), uuid: "abc123", commutes: Map() });
   t.end();
 });

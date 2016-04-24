@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addDestination } from '../actions/destination';
 
-export default class AddDestination extends React.Component {
+export class AddDestination extends React.Component {
   constructor(props) {
     super(props);
     this.state = { postcodeInput: '' };
@@ -12,7 +14,7 @@ export default class AddDestination extends React.Component {
 
   submit(event) {
     event.preventDefault();
-    this.props.addDestinationCallback(this.state.postcodeInput);
+    this.props.addDestination(this.state.postcodeInput);
     this.setState({ postcodeInput: '' });
   }
 
@@ -36,3 +38,5 @@ export default class AddDestination extends React.Component {
     );
   }
 }
+
+export default connect(null, { addDestination })(AddDestination);
