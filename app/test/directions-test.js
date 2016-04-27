@@ -45,7 +45,6 @@ test('when no directions are available', (t) => {
     .catch(t.fail);
 });
 
-
 test('when some directions are available', (t) => {
   t.plan(9);
 
@@ -67,4 +66,3 @@ test('when some directions are available', (t) => {
     .then((results) => t.deepEqual(results, expectedResults))
     .catch(t.fail);
 });
-

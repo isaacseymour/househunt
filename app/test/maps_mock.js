@@ -1,4 +1,4 @@
-export const GeocoderStatus = { ERROR: "ERROR", OK: "OK" };
+export const GeocoderStatus = { ERROR: "ERROR", OK: "OK", OVER_QUERY_LIMIT: "OVER_QUERY_LIMIT" };
 
 export class LatLng {
   constructor(lat, lng) {

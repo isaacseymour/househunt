@@ -13,10 +13,11 @@ import reducer from '../reducers';
 
 test('adding destination', (t) => {
   const initState = { destinations: Map() };
-  const newState = reducer(initState, requestDestination('id', 'WC1X 9QZ'));
+  const newState = reducer(initState, requestDestination('id', 'WC1X 9QZ', 'Somewhere'));
   t.equal(newState.destinations.size, 1);
   t.deepEqual(newState.destinations.first().toJS(), Map({
     postcode: 'WC1X 9QZ',
+    name: 'Somewhere',
   }).toJS());
   t.end();
 });
