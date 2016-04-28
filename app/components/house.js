@@ -36,7 +36,7 @@ export class House extends React.Component {
 
     return (
       <li key={destinationId}>
-        {showCommute(commute.toObject())} to {destination.get("postcode")}
+        {showCommute(commute.toObject())} to {destination.get('name') || destination.get('postcode')}
       </li>
     );
   }

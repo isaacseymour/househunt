@@ -5,8 +5,8 @@ import {
   UPDATE_DESTINATION_DATA,
 } from '../actions/destination';
 
-const addDestinationReducer = (destinations, { id, postcode }) => {
-  return destinations.set(id, Map({ postcode }));
+const addDestinationReducer = (destinations, { id, postcode, name }) => {
+  return destinations.set(id, Map({ postcode, name }));
 };
 
 const deleteDestinationReducer = (destinations, { id }) => destinations.delete(id);

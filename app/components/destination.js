@@ -17,11 +17,19 @@ export class Destination extends React.Component {
       </span>
     );
   }
+
+  renderName() {
+    if(this.props.destination.get('name')) {
+      return `${this.props.destination.get('name')} (${this.props.destination.get('postcode')})`;
+    } else {
+      return this.props.destination.get('postcode');
+    }
+  }
+
   render() {
     return (
       <div>
-        { this.props.destination.get('postcode') }
-        { this.renderLatLng() }
+        { this.renderName() }
         <a href=""
           onClick={(event) => this.onDeleteClick(event)}
           className="secondary-content"><i className="material-icons">delete</i></a>

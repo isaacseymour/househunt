@@ -5,7 +5,7 @@ import { addDestination } from '../actions/destination';
 export class AddDestination extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { postcodeInput: '' };
+    this.state = { postcodeInput: '', nameInput: '' };
   }
 
   handleChange(event) {
@@ -14,19 +14,31 @@ export class AddDestination extends React.Component {
 
   submit(event) {
     event.preventDefault();
-    this.props.addDestination(this.state.postcodeInput);
-    this.setState({ postcodeInput: '' });
+    this.props.addDestination(this.state.postcodeInput, this.state.nameInput);
+    this.setState({ postcodeInput: '', nameInput: '' });
   }
 
   render() {
+    const handleChange = (event) => this.setState({ [event.target.name]: event.target.value });
+
     return (
       <div className="row">
         <form className="col s12" onSubmit={(event) => this.submit(event)}>
           <div className="row">
             <div className="input-field col s12">
-              <input type="text"
-                     value={this.state.postcodeInput}
-                     onChange={(event) => this.handleChange(event)} />
+              <input
+                type="text"
+                name="nameInput"
+                value={this.state.nameInput}
+                onChange={handleChange} />
+              <label>Name</label>
+            </div>
+            <div className="input-field col s12">
+              <input
+                type="text"
+                name="postcodeInput"
+                value={this.state.postcodeInput}
+                onChange={handleChange} />
               <label>Postcode</label>
             </div>
           </div>

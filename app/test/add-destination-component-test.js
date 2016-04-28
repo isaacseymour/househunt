@@ -8,22 +8,29 @@ import { AddDestination } from '../components/add-destination';
 
 test('AddDestination component', (t) => {
   dom();
-  t.plan(2);
-  const callback = (postcode) => {
+  t.plan(4);
+  const callback = (postcode, name) => {
     t.equal(postcode, 'WC1X 9QZ');
+    t.equal(name, 'Somewhere');
   };
 
   const result = ReactTestUtils.renderIntoDocument(
-    <AddDestination addDestination={callback}/>
+    <AddDestination addDestination={callback} />
   );
 
-  const element = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'input');
-  const textNode = ReactDOM.findDOMNode(element);
-  textNode.value = 'WC1X 9QZ';
-  ReactTestUtils.Simulate.change(textNode);
+  const nameEl = ReactTestUtils.scryRenderedDOMComponentsWithTag(result, 'input')[0];
+  const nameNode = ReactDOM.findDOMNode(nameEl);
+  nameNode.value = 'Somewhere';
+  ReactTestUtils.Simulate.change(nameNode);
+
+  const postcodeEl = ReactTestUtils.scryRenderedDOMComponentsWithTag(result, 'input')[1];
+  const postcodeNode = ReactDOM.findDOMNode(postcodeEl);
+  postcodeNode.value = 'WC1X 9QZ';
+  ReactTestUtils.Simulate.change(postcodeNode);
 
   const form = ReactTestUtils.findRenderedDOMComponentWithTag(result, 'form');
   ReactTestUtils.Simulate.submit(ReactDOM.findDOMNode(form));
 
-  t.equal(textNode.value, '');
+  t.equal(nameNode.value, '');
+  t.equal(postcodeNode.value, '');
 });
